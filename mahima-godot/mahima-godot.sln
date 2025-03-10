@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mahima-godot", "mahima-godot.csproj", "{44B52B8F-86C4-46AC-8231-A5A193631D13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{44B52B8F-86C4-46AC-8231-A5A193631D13}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
