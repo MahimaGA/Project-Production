@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=7 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://controller.tscn" id="1_i4b68"]
+[ext_resource type="Script" path="res://scripts/controller.cs" id="1_yxldu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,6 +20,7 @@ glow_enabled = true
 size = Vector2(10, 10)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_yxldu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4pakn")
@@ -33,3 +35,4 @@ mesh = SubResource("PlaneMesh_6uvj3")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_i4b68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934216, 0)
+script = null
