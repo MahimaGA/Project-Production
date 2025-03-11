@@ -6,8 +6,10 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x2el5"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("Camera")]
 script = ExtResource("1_52e5s")
+Camera = NodePath("CameraController/Camera3D")
+MouseSensitivity = 0.4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_jyds6")

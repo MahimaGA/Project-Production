@@ -35,4 +35,3 @@ mesh = SubResource("PlaneMesh_6uvj3")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_i4b68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934216, 0)
-script = null

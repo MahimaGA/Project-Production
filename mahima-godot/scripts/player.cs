@@ -6,15 +6,28 @@ public partial class player : CharacterBody3D
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 
+	[Export] public float TiltLowerLimit = Mathf.DegToRad(-90.0f); //min for clamp
+	[Export] public float TiltUpperLimit = Mathf.DegToRad(90.0f); //max for clamp
+	[Export] public Camera3D Camera;
+	    [Export] public float MouseSensitivity = 0.1f; // Mouse sensitivity for camera control
+	
+	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
+	public Vector3 CameraRotation= new Vector3(0.0f,0.0f,0.0f);
+	
+	public Boolean MouseInput = false;
+	public float AxisX;
+	public float AxisY;
 
-    public override void _Ready()
-    {
-		// Capture the mouse cursor
-        Input.MouseMode = Input.MouseModeEnum.Captured;
-    }
+	public override void _Ready()
+	{			
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
 
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		UpdateCamera(delta);
+
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
@@ -22,6 +35,7 @@ public partial class player : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
+
 
 		// Handle Jump.
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
@@ -47,4 +61,42 @@ public partial class player : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event is InputEventMouseMotion mouseEvent)
+		{
+			if(Input.MouseMode == Input.MouseModeEnum.Captured)
+			{
+				MouseInput = true;
+				AxisX = -mouseEvent.Relative.X * MouseSensitivity;
+				AxisY = -mouseEvent.Relative.Y * MouseSensitivity;
+				GD.Print(AxisX," ",AxisY);
+			}
+			else
+			{
+				GD.Print("Mouse is not captured.");
+			}
+			
+		}
+		else
+        {
+            GD.Print("Condition not met.");
+        }
+	}
+
+	public void UpdateCamera(double delta)
+	{
+		MouseRotation.X += (float)(AxisX * delta);
+		MouseRotation.X = Mathf.Clamp(MouseRotation.X,TiltLowerLimit, TiltUpperLimit);
+		MouseRotation.Y += (float)(AxisY * delta); 
+
+		Camera.Basis = Basis.FromEuler(MouseRotation);
+		//Camera.Rotation = new Vector3(MouseRotation.X, MouseRotation.Y, 0.0f);
+
+		AxisX= 0.0f;
+		AxisY= 0.0f;
+	}
+
+    
 }
