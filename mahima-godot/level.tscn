@@ -63,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="Control" node_paths=PackedStringArray("CrosshairLines", "PlayerController")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,6 +77,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_76vdv")
+CrosshairLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PlayerController = NodePath("../../CharacterBody3D")
 
 [node name="Top" type="Line2D" parent="Control/CenterContainer"]
 points = PackedVector2Array(0, -10, 0, -25)
