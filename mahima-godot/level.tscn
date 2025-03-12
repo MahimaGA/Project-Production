@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=10 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://controller.tscn" id="1_i4b68"]
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_yxldu"]
+[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="3_76vdv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -52,3 +53,43 @@ collision_layer = 1023
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 height = 5.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_76vdv")
+
+[node name="Top" type="Line2D" parent="Control/CenterContainer"]
+points = PackedVector2Array(0, -10, 0, -25)
+width = 5.0
+
+[node name="Right" type="Line2D" parent="Control/CenterContainer"]
+points = PackedVector2Array(10, 0, 25, 0)
+width = 5.0
+
+[node name="Bottom" type="Line2D" parent="Control/CenterContainer"]
+points = PackedVector2Array(0, 10, 0, 25)
+width = 5.0
+
+[node name="Left" type="Line2D" parent="Control/CenterContainer"]
+points = PackedVector2Array(-10, 0, -25, 0)
+width = 5.0
