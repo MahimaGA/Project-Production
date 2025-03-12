@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=9 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://controller.tscn" id="1_i4b68"]
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_yxldu"]
@@ -16,8 +16,14 @@ sky = SubResource("Sky_aren2")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cth7w"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_6uvj3"]
-size = Vector2(10, 10)
+material = SubResource("StandardMaterial3D_cth7w")
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
+size = Vector3(20, 1, 20)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_yxldu")
@@ -26,12 +32,23 @@ script = ExtResource("1_yxldu")
 environment = SubResource("Environment_4pakn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 4, 0)
 light_color = Color(1, 1, 0.541176, 1)
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+layers = 1023
 mesh = SubResource("PlaneMesh_6uvj3")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_qpqx1")
+
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_i4b68")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934216, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.06578, 2.30429)
+collision_layer = 1023
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+height = 5.0

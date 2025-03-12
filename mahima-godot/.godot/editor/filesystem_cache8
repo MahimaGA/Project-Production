@@ -1,9 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1741707808
-controller.tscn::PackedScene::2861656425574796249::1741707271::0::1::::<><>::res://scripts/player.cs
+::res://::1741763498
+controller.tscn::PackedScene::2861656425574796249::1741709875::0::1::::<><>::res://scripts/player.cs
 Icon.cs::CSharpScript::-1::1741602290::0::1::::<>Sprite2D<>::
 icon.svg::CompressedTexture2D::3644657707056553224::1741595846::1741595856::1::::<><>::
-level.tscn::PackedScene::537248644035684039::1741707271::0::1::::<><>::uid://bg1hcfdorug5v::::res://controller.tscn<>res://scripts/controller.cs
+level.tscn::PackedScene::537248644035684039::1741709875::0::1::::<><>::uid://bg1hcfdorug5v::::res://controller.tscn<>res://scripts/controller.cs
 ::res://scripts/::1741617988
 controller.cs::CSharpScript::-1::1741703954::0::1::::<>Node3D<>::
 player.cs::CSharpScript::-1::1741707164::0::1::::<>CharacterBody3D<>::
