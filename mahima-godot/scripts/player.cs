@@ -72,7 +72,7 @@ public partial class player : CharacterBody3D
 				MouseInput = true;
 				AxisX = -mouseEvent.Relative.Y * MouseSensitivity;
 				AxisY = -mouseEvent.Relative.X * MouseSensitivity;
-				GD.Print(AxisX," ",AxisY);
+				//GD.Print(AxisX," ",AxisY);
 			}
 			else
 			{
