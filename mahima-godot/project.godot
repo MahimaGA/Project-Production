@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 driver/driver="OpenAL"
 
+[autoload]
+
+Global="*res://scripts/globalscript.cs"
+
 [display]
 
 window/size/viewport_width=1920

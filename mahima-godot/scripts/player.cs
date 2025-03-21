@@ -27,6 +27,10 @@ public partial class player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		//var global = (globalscript)GetNode("/root/Global");
+		//creating property then updates every frame
+		//global.DebugInstance.AddProperty("MovementSpeed", Speed.ToString() , 1);
+
 		UpdateCamera(delta);
 
 		Vector3 velocity = Velocity;
