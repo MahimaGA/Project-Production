@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=14 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://controller.tscn" id="1_i4b68"]
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_yxldu"]
@@ -28,6 +28,9 @@ size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
 size = Vector3(20, 1, 20)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yf1pn"]
+height = 0.5
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_yxldu")
@@ -66,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Interface" node_paths=PackedStringArray("CrosshairLines", "PlayerController")]
+[node name="CenterContainer" type="CenterContainer" parent="Interface" node_paths=PackedStringArray("PlayerController")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,7 +83,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_76vdv")
-CrosshairLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 PlayerController = NodePath("../../CharacterBody3D")
 
 [node name="Top" type="Line2D" parent="Interface/CenterContainer"]
@@ -116,3 +118,11 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Interface/DebugPanel/MarginContainer"]
 layout_mode = 2
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, 0)
+
+[node name="Target1" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
+shape = SubResource("CylinderShape3D_yf1pn")

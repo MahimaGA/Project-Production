@@ -11,6 +11,12 @@ public partial class player : CharacterBody3D
 	[Export] public Camera3D Camera;
 	[Export] public float MouseSensitivity = 0.05f; // Mouse sensitivity for camera control
 	
+	[Export] public RayCast3D Raycast;
+
+	public float Gravity = 9.8f;
+    public PackedScene Bullet = GD.Load<PackedScene>("res://bullet.tscn");
+
+
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
 	
 	public Boolean MouseInput = false;
@@ -43,9 +49,11 @@ public partial class player : CharacterBody3D
 
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("jump") && IsOnFloor())
+		if (Input.IsActionJustPressed("shoot"))
 		{
-			velocity.Y = JumpVelocity;
+			Shoot();
+			GD.Print("SHOOT");
+
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -86,7 +94,7 @@ public partial class player : CharacterBody3D
 		}
 		else
         {
-            GD.Print("Condition not met.");
+            //GD.Print("Condition not met.");
         }
 	}
 
@@ -106,6 +114,37 @@ public partial class player : CharacterBody3D
 
 		AxisX= 0.0f;
 		AxisY= 0.0f;
+	}
+
+	public void Shoot()
+	{
+		// Instance the bullet scene
+        Node3D bullet = (Node3D)Bullet.Instantiate();
+        
+		// Assuming you have a Node3D named "Muzzle" as a child of the camera or player.
+		//Node3D muzzle = GetNode<Node3D>("Muzzle");
+		//bullet.GlobalTransform = muzzle.GlobalTransform;	
+
+		// Set the bullet's starting position at the camera's position.
+        bullet.GlobalTransform = Camera.GlobalTransform;
+        // Add the bullet to the scene (parent might be your main game scene)
+        GetParent().AddChild(bullet);
+
+        Vector3 targetPosition;
+		if (Raycast.IsColliding())
+		{
+			targetPosition = Raycast.GetCollisionPoint();
+		}
+		else
+		{
+			targetPosition = Camera.GlobalTransform.Origin + (-Camera.GlobalTransform.Basis.Z * 1000f);
+		}
+
+		Vector3 direction = (targetPosition - bullet.GlobalTransform.Origin).Normalized();
+		GD.Print("Bullet direction: " + direction);
+		bullet.Call("Initialize", direction);
+
+
 	}
 
     

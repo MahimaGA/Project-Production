@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://y7dirjoaawk5"
-path="res://.godot/imported/low-poly_milkor_mgl.glb-dae0350d6689e517c4474b210575e23e.scn"
+uid="uid://c6o0x1jrp1qhp"
+path="res://.godot/imported/small_gun.glb-f99a28d3154b8b47e4842af29fef615e.scn"
 
 [deps]
 
-source_file="res://assets/low-poly_milkor_mgl.glb"
-dest_files=["res://.godot/imported/low-poly_milkor_mgl.glb-dae0350d6689e517c4474b210575e23e.scn"]
+source_file="res://assets/small_gun.glb"
+dest_files=["res://.godot/imported/small_gun.glb-f99a28d3154b8b47e4842af29fef615e.scn"]
 
 [params]
 
