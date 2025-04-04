@@ -10,6 +10,7 @@
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("Camera", "Raycast")]
 script = ExtResource("1_52e5s")
+Speed = 3.0
 Camera = NodePath("CameraController/Camera3D")
 MouseSensitivity = 0.4
 Raycast = NodePath("CameraController/Camera3D/RayCast3D")
@@ -31,7 +32,7 @@ update_mode = 1
 [node name="Weapon" type="Node3D" parent="CameraController/Camera3D"]
 
 [node name="Sketchfab_Scene" parent="CameraController/Camera3D/Weapon" instance=ExtResource("2_cl6oa")]
-transform = Transform3D(-2.18557e-10, 0, -0.005, 0, 0.005, 0, 0.005, 0, -2.18557e-10, 0.6, -1.2, -1)
+transform = Transform3D(-2.18557e-10, 0, -0.005, 0, 0.005, 0, 0.005, 0, -2.18557e-10, 0.45, -1.1, -1)
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController/Camera3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

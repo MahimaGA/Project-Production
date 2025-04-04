@@ -120,10 +120,6 @@ public partial class player : CharacterBody3D
 	{
 		// Instance the bullet scene
         Node3D bullet = (Node3D)Bullet.Instantiate();
-        
-		// Assuming you have a Node3D named "Muzzle" as a child of the camera or player.
-		//Node3D muzzle = GetNode<Node3D>("Muzzle");
-		//bullet.GlobalTransform = muzzle.GlobalTransform;	
 
 		// Set the bullet's starting position at the camera's position.
         bullet.GlobalTransform = Camera.GlobalTransform;
