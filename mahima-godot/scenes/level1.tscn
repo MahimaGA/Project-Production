@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://hwin3d6pmm2r"]
 
-[ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://controller.tscn" id="1_i4b68"]
-[ext_resource type="Script" path="res://scripts/controller.cs" id="1_yxldu"]
-[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="3_76vdv"]
-[ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="4_xo6g2"]
-[ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_68qqd"]
-[ext_resource type="Script" path="res://scripts/debug.cs" id="6_5js0c"]
+[ext_resource type="Script" path="res://scripts/controller.cs" id="1_p4lo2"]
+[ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="2_xpb53"]
+[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="3_ou8n0"]
+[ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="4_nlb6t"]
+[ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_53ytl"]
+[ext_resource type="Script" path="res://scripts/debug.cs" id="6_8y04y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,7 +36,7 @@ size = Vector3(20, 1, 20)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g2ynt"]
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("1_yxldu")
+script = ExtResource("1_p4lo2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4pakn")
@@ -56,7 +56,7 @@ mesh = SubResource("PlaneMesh_6uvj3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3DFloor"]
 shape = SubResource("BoxShape3D_qpqx1")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("1_i4b68")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_xpb53")]
 transform = Transform3D(0.998117, 0, -0.0613446, 0, 1, 0, 0.0613446, 0, 0.998117, 3.979, -1.06578, 3.63419)
 collision_layer = 1023
 
@@ -85,7 +85,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_76vdv")
+script = ExtResource("3_ou8n0")
 PlayerController = NodePath("../../CharacterBody3D")
 
 [node name="Top" type="Line2D" parent="Interface/CenterContainer"]
@@ -111,9 +111,9 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
 offset_bottom = 50.0
-theme = ExtResource("4_xo6g2")
-theme_override_styles/panel = ExtResource("5_68qqd")
-script = ExtResource("6_5js0c")
+theme = ExtResource("4_nlb6t")
+theme_override_styles/panel = ExtResource("5_53ytl")
+script = ExtResource("6_8y04y")
 PropertyContainer = NodePath("MarginContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface/DebugPanel"]
@@ -125,7 +125,7 @@ layout_mode = 2
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98684, 0, 2.37969)
 
-[node name="Area3D" type="Area3D" parent="Target" groups=["InnerCircle", "OuterCircle"]]
+[node name="Area3D" type="Area3D" parent="Target" groups=["OuterCircle"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
 
 [node name="Outer" type="CollisionShape3D" parent="Target/Area3D"]

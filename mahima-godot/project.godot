@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="mahima-godot"
-run/main_scene="res://level.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,7 @@ driver/driver="OpenAL"
 [autoload]
 
 Global="*res://scripts/globalscript.cs"
+GameManager="*res://scripts/GameManager.cs"
 
 [display]
 
