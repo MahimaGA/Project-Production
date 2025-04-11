@@ -12,11 +12,10 @@ public partial class player : CharacterBody3D
 	[Export] public float MouseSensitivity = 0.05f; // Mouse sensitivity for camera control
 	
 	[Export] public RayCast3D Raycast;
+	[Export] public PackedScene Bullet;
+
 
 	public float Gravity = 9.8f;
-    public PackedScene Bullet = GD.Load<PackedScene>("res://bullet.tscn");
-
-
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
 	
 	public Boolean MouseInput = false;
@@ -41,6 +40,12 @@ public partial class player : CharacterBody3D
 
 		Vector3 velocity = Velocity;
 
+		if (Input.IsActionJustPressed("pause"))
+		{
+			string pausemenupath = "res://scenes/pause_menu.tscn";
+			GetTree().ChangeSceneToFile(pausemenupath);
+		}
+		
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
@@ -48,7 +53,6 @@ public partial class player : CharacterBody3D
 		}
 
 
-		// Handle Jump.
 		if (Input.IsActionJustPressed("shoot"))
 		{
 			Shoot();
