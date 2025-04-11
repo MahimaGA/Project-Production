@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bv473sptnhmo2"]
 
 [ext_resource type="Script" path="res://scripts/nextlevel.cs" id="1_cavkl"]
-[ext_resource type="Script" path="res://scripts/main_menu.cs" id="2_le38h"]
+[ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_le38h"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -57,7 +57,6 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Next Level"
 script = ExtResource("1_cavkl")
-theme_override_font_sizes/font_size = 30
 
 [node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -65,7 +64,6 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 script = ExtResource("2_le38h")
-theme_override_font_sizes/font_size = 30
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NextLevel" to="CenterContainer/VBoxContainer/HBoxContainer/NextLevel" method="OnPressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" to="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" method="_on_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" to="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" method="OnPressed"]
