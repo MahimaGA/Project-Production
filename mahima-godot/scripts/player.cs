@@ -34,8 +34,8 @@ public partial class player : CharacterBody3D
 	{
 		var global = (globalscript)GetNode("/root/Global");
 		//creating property then updates every frame
-		global.DebugInstance.AddProperty("MovementSpeed", Speed.ToString() , 1);
-		global.DebugInstance.AddProperty("MouseRotation", MouseRotation.ToString() , 2); //prints x,y,z position of cursor
+		// global.DebugInstance.AddProperty("MovementSpeed", Speed.ToString() , 1);
+		// global.DebugInstance.AddProperty("MouseRotation", MouseRotation.ToString() , 2); //prints x,y,z position of cursor
 		UpdateCamera(delta);
 
 		Vector3 velocity = Velocity;
@@ -45,7 +45,7 @@ public partial class player : CharacterBody3D
 			string pausemenupath = "res://scenes/pause_menu.tscn";
 			GetTree().ChangeSceneToFile(pausemenupath);
 		}
-		
+
 		// Add the gravity.
 		if (!IsOnFloor())
 		{

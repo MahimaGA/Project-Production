@@ -10,12 +10,15 @@ public partial class debug : PanelContainer
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
+		AddInstructions();
+
     	var global = (globalscript)GetNode("/root/Global");
     	global.DebugInstance = this;
 
 		PropertyContainer = GetNode<VBoxContainer>("MarginContainer/VBoxContainer"); // Ensure this path is correct
 		//Visible = false;
     	// fpsLabel = AddDebugProperty("FPS", fps);	
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,5 +76,12 @@ public partial class debug : PanelContainer
     {
         throw new NotImplementedException();
     }
+
+	public void AddInstructions()
+	{
+		AddProperty("P", "Pause the game", 0);
+		AddProperty("ESC", "Exit the game", 1);
+	}
+
 
 }

@@ -8,7 +8,7 @@ public partial class globalscript : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-    DebugInstance = GetNode<debug>("/root/Global/Debug"); // Ensure Debug is correctly named		global.DebugInstance = this;
+    	DebugInstance = GetNode<debug>("/root/Global/Debug"); 
 
 	}
 
