@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=17 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_p4lo2"]
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="2_xpb53"]
 [ext_resource type="Script" path="res://scripts/crosshairs.cs" id="3_ou8n0"]
+[ext_resource type="PackedScene" uid="uid://c84by808e7lo7" path="res://scenes/bullet.tscn" id="3_ttv70"]
 [ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="4_nlb6t"]
 [ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_53ytl"]
 [ext_resource type="Script" path="res://scripts/debug.cs" id="6_8y04y"]
@@ -35,7 +36,7 @@ size = Vector3(20, 1, 20)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g2ynt"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D2" type="Node3D"]
 script = ExtResource("1_p4lo2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -59,6 +60,7 @@ shape = SubResource("BoxShape3D_qpqx1")
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_xpb53")]
 transform = Transform3D(0.998117, 0, -0.0613446, 0, 1, 0, 0.0613446, 0, 0.998117, 3.979, -1.06578, 3.63419)
 collision_layer = 1023
+Bullet = ExtResource("3_ttv70")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 height = 5.0

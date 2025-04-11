@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c84by808e7lo7"]
+[gd_scene load_steps=7 format=3 uid="uid://c84by808e7lo7"]
 
 [ext_resource type="Script" path="res://scripts/bullet.cs" id="1_av0rc"]
-[ext_resource type="PackedScene" uid="uid://dd3x6ht8yckr2" path="res://scenes/bullet_mark.tscn" id="2_3itjb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_284e7"]
 size = Vector3(0.05, 0.05, 1)
@@ -27,7 +26,6 @@ size = Vector3(0.04, 0.04, 0.04)
 
 [node name="Bullet" type="Node3D" node_paths=PackedStringArray("Mesh", "Ray", "Particles")]
 script = ExtResource("1_av0rc")
-BulletMarkScene = ExtResource("2_3itjb")
 Mesh = NodePath("MeshInstance3D")
 Ray = NodePath("RayCast3D")
 Particles = NodePath("GPUParticles3D")
