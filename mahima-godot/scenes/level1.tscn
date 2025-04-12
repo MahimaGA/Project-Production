@@ -74,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Interface" node_paths=PackedStringArray("PlayerController")]
+[node name="CenterContainer" type="CenterContainer" parent="Interface" node_paths=PackedStringArray("CrosshairLines", "PlayerController")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -88,6 +88,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_ou8n0")
+CrosshairLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 PlayerController = NodePath("../../CharacterBody3D")
 
 [node name="Top" type="Line2D" parent="Interface/CenterContainer"]
@@ -127,32 +128,32 @@ layout_mode = 2
 [node name="Target" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98684, 0, 2.37969)
 
-[node name="Area3D" type="Area3D" parent="Target" groups=["OuterCircle"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="Target" groups=["OuterCircle"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
 
-[node name="Outer" type="CollisionShape3D" parent="Target/Area3D"]
+[node name="Outer" type="CollisionShape3D" parent="Target/StaticBody3D"]
 shape = SubResource("CylinderShape3D_geqhk")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/Area3D/Outer"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/StaticBody3D/Outer"]
 radius = 0.6
 height = 0.2
 
-[node name="Area3D2" type="Area3D" parent="Target" groups=["MiddleCircle"]]
+[node name="StaticBody3D2" type="StaticBody3D" parent="Target" groups=["MiddleCircle"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
 
-[node name="Middle" type="CollisionShape3D" parent="Target/Area3D2"]
+[node name="Middle" type="CollisionShape3D" parent="Target/StaticBody3D2"]
 shape = SubResource("CylinderShape3D_146o3")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/Area3D2/Middle"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/StaticBody3D2/Middle"]
 radius = 0.4
 height = 0.4
 
-[node name="Area3D3" type="Area3D" parent="Target" groups=["InnerCircle"]]
+[node name="StaticBody3D3" type="StaticBody3D" parent="Target" groups=["InnerCircle"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
 
-[node name="Inner" type="CollisionShape3D" parent="Target/Area3D3"]
+[node name="Inner" type="CollisionShape3D" parent="Target/StaticBody3D3"]
 shape = SubResource("CylinderShape3D_g2ynt")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/Area3D3/Inner"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/StaticBody3D3/Inner"]
 radius = 0.2
 height = 0.6
