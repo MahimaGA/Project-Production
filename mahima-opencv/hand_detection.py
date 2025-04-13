@@ -15,7 +15,7 @@ hands = mphands.Hands(
 def isshoot(landmarks_list, thumb_to_index):
     return (util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90 and 
             util.getangle(landmarks_list[9], landmarks_list[10], landmarks_list[12]) < 50 and
-            thumb_to_index > 75 )
+            thumb_to_index < 75 )
 
 def move_mouse(index_finger_tip):
     if index_finger_tip is not None:
@@ -30,7 +30,7 @@ def detect_gestures(frame, landmarks_list, processed, shooting_state):
         thumb_to_index = util.getdistance([landmarks_list[4], landmarks_list[5]])
         
         #aim (curosr movement)
-        if thumb_to_index < 75 and util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90:
+        if thumb_to_index > 75 and util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90:
             move_mouse(index_finger_tip)
             shooting_state[0] = False
             cv2.putText(frame, "Aiming", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
