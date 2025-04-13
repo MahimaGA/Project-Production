@@ -12,8 +12,8 @@ public partial class debug : PanelContainer
 	{
 		AddInstructions();
 
-    	var global = (globalscript)GetNode("/root/Global");
-    	global.DebugInstance = this;
+    	// var global = (globalscript)GetNode("/root/Global");
+    	// global.DebugInstance = this;
 
 		PropertyContainer = GetNode<VBoxContainer>("MarginContainer/VBoxContainer"); // Ensure this path is correct
 		//Visible = false;
@@ -72,10 +72,10 @@ public partial class debug : PanelContainer
 		}
 	}
 
-    public static implicit operator debug(globalscript v)
-    {
-        throw new NotImplementedException();
-    }
+    // public static implicit operator debug(globalscript v)
+    // {
+    //     throw new NotImplementedException();
+    // }
 
 	public void AddInstructions()
 	{

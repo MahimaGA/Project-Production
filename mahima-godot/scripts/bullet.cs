@@ -61,7 +61,7 @@ public partial class bullet : Node3D
 				{
 					GD.Print($"Raycast hit: {collider.Name}");
 					// Ensure we are hitting an Area3D
-					if (collider is Area3D hitArea)
+					if (collider is StaticBody3D hitArea)
 					{
 						GD.Print($"Bullet hit: {hitArea.Name}");
 

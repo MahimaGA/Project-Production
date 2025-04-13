@@ -32,7 +32,7 @@ public partial class player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		var global = (globalscript)GetNode("/root/Global");
+		// var global = (globalscript)GetNode("/root/Global");
 		//creating property then updates every frame
 		// global.DebugInstance.AddProperty("MovementSpeed", Speed.ToString() , 1);
 		// global.DebugInstance.AddProperty("MouseRotation", MouseRotation.ToString() , 2); //prints x,y,z position of cursor
@@ -62,20 +62,20 @@ public partial class player : CharacterBody3D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		if (direction != Vector3.Zero)
-		{
-			velocity.X = direction.X * Speed;
-			velocity.Z = direction.Z * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
-		}
+		// Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
+		// Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		// if (direction != Vector3.Zero)
+		// {
+		// 	velocity.X = direction.X * Speed;
+		// 	velocity.Z = direction.Z * Speed;
+		// }
+		// else
+		// {
+		// 	velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+		// 	velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+		// }
 
-		Velocity = velocity;
+		// Velocity = velocity;
 		MoveAndSlide();
 	}
 
