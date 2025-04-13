@@ -1,5 +1,7 @@
 import cv2
 import mediapipe as mp
+import utility as util
+import pyautogui as pg
 
 mphands = mp.solutions.hands
 hands = mphands.Hands(
@@ -9,6 +11,28 @@ hands = mphands.Hands(
     min_tracking_confidence= 0.7,
     max_num_hands = 1
 )
+
+def move_mouse(index_finger_tip):
+    if index_finger_tip is not None:
+        x = int(index_finger_tip.x * pg.size().width) #x coordinate and screen width
+        y= int(index_finger_tip.y * pg.size().height) #y coordinate and screen height
+        pg.moveTo(x, y) #move to x,y on screen
+
+def detect_gestures(frame, landmarks_list, processed):
+    if len(landmarks_list) >= 21:
+        
+        index_finger_tip = find_tip(processed)
+        thumb_to_index = util.getdistance([landmarks_list[4], landmarks_list[5]])
+
+        if thumb_to_index < 50 and util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90:
+            move_mouse(index_finger_tip)
+
+def find_tip(processed):
+    if processed.multi_hand_landmarks:
+        hand_landmarks = processed.multi_hand_landmarks[0]
+        return hand_landmarks.landmark[mphands.HandLandmark.INDEX_FINGER_TIP]
+    
+    return None
 
 def main():
     capture = cv2.VideoCapture(0) #using primary camera=0
@@ -34,7 +58,9 @@ def main():
                 for lm in hand_landmarks.landmark: #taking each and appending
                     landmarks_list.append((lm.x, lm.y)) #add coordinates to list
 
-                print(landmarks_list) #to check
+            detect_gestures(frame, landmarks_list, processed)
+
+                #print(landmarks_list) #to check
 
             cv2.imshow("Frame", frame) #display frame
             if cv2.waitKey(1) & 0xFF == ord('q'): #wait 1 ms and key Q 
