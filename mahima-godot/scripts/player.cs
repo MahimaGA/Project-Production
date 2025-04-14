@@ -14,6 +14,7 @@ public partial class player : CharacterBody3D
 	[Export] public RayCast3D Raycast;
 	[Export] public PackedScene Bullet;
 
+	[Export] public CanvasLayer pauseMenu;
 
 	public float Gravity = 9.8f;
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
@@ -42,8 +43,7 @@ public partial class player : CharacterBody3D
 
 		if (Input.IsActionJustPressed("pause"))
 		{
-			string pausemenupath = "res://scenes/pause_menu.tscn";
-			GetTree().ChangeSceneToFile(pausemenupath);
+			Pause();
 		}
 
 		// Add the gravity.
@@ -144,6 +144,14 @@ public partial class player : CharacterBody3D
 		GD.Print("Bullet direction: " + direction);
 		bullet.Call("Initialize", direction);
 
+
+	}
+
+	public void Pause()
+	{
+		GetTree().Paused = true;
+		pauseMenu.Show();
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 
 	}
 
