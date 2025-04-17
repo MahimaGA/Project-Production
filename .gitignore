@@ -4,3 +4,7 @@
 
 # VSCode specific ignores
 .vscode/
+
+# Python specific ignores
+__pycache__/
+.venv/
