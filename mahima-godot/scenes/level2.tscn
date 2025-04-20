@@ -9,7 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_53ytl"]
 [ext_resource type="Script" path="res://scripts/debug.cs" id="6_8y04y"]
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="8_sgit1"]
-[ext_resource type="Script" path="res://scenes/Continue.cs" id="9_eq6cr"]
+[ext_resource type="Script" path="res://scripts/Continue.cs" id="9_eq6cr"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="9_vd0qr"]
 [ext_resource type="Script" path="res://scripts/TcpReceiver.cs" id="12_ef5lb"]
 

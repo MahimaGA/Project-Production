@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cr1tulfg1duk4"]
 
-[ext_resource type="Script" path="res://scripts/newgame.cs" id="1_87qye"]
+[ext_resource type="Script" path="res://scripts/restart.cs" id="1_7xiam"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="2_qdsoj"]
 
 [node name="Control" type="Control"]
@@ -52,7 +52,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Restart Game"
-script = ExtResource("1_87qye")
+script = ExtResource("1_7xiam")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2

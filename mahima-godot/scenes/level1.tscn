@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hwin3d6pmm2r"]
+[gd_scene load_steps=21 format=3 uid="uid://hwin3d6pmm2r"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_p4lo2"]
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="2_xpb53"]
@@ -8,8 +8,9 @@
 [ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_53ytl"]
 [ext_resource type="Script" path="res://scripts/debug.cs" id="6_8y04y"]
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="8_sgit1"]
-[ext_resource type="Script" path="res://scenes/Continue.cs" id="9_eq6cr"]
+[ext_resource type="Script" path="res://scripts/Continue.cs" id="9_eq6cr"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="9_vd0qr"]
+[ext_resource type="Script" path="res://scripts/TcpReceiver.cs" id="11_mw0on"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -65,6 +66,7 @@ transform = Transform3D(0.998117, 0, -0.0613446, 0, 1, 0, 0.0613446, 0, 0.998117
 collision_layer = 1023
 Bullet = ExtResource("3_ttv70")
 pauseMenu = NodePath("../PauseMenu")
+tcppath = NodePath("../TcpReceiver")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 height = 5.0
@@ -221,6 +223,9 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("9_vd0qr")
+
+[node name="TcpReceiver" type="Node" parent="."]
+script = ExtResource("11_mw0on")
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Continue" to="PauseMenu/CenterContainer/VBoxContainer/Continue" method="Unpause"]

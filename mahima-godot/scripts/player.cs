@@ -15,6 +15,7 @@ public partial class player : CharacterBody3D
 	[Export] public PackedScene Bullet;
 
 	[Export] public CanvasLayer pauseMenu;
+	[Export] public NodePath tcppath;
 
 	public float Gravity = 9.8f;
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
@@ -29,6 +30,11 @@ public partial class player : CharacterBody3D
 	public override void _Ready()
 	{			
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		var _tcp = GetNode<TcpReceiver>(tcppath);
+
+		_tcp.Connect("CameraMotionReceived", new Callable(this, nameof(OnCameraMotion)));
+		_tcp.Connect("FingerDataReceived",    new Callable(this, nameof(OnFingerDataReceived)));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -62,20 +68,20 @@ public partial class player : CharacterBody3D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		// Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
-		// Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		// if (direction != Vector3.Zero)
-		// {
-		// 	velocity.X = direction.X * Speed;
-		// 	velocity.Z = direction.Z * Speed;
-		// }
-		// else
-		// {
-		// 	velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		// 	velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
-		// }
+		Vector2 inputDir = Input.GetVector("left", "right", "up", "down");
+		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		if (direction != Vector3.Zero)
+		{
+			velocity.X = direction.X * Speed;
+			velocity.Z = direction.Z * Speed;
+		}
+		else
+		{
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+		}
 
-		// Velocity = velocity;
+		Velocity = velocity;
 		MoveAndSlide();
 	}
 
@@ -154,6 +160,30 @@ public partial class player : CharacterBody3D
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 
 	}
+
+	public void OnCameraMotion(float dx, float dy)
+    {
+        //python sends pixels and map in same AxisX/Y pipeline
+        AxisY = -dx * MouseSensitivity;
+        AxisX = -dy * MouseSensitivity;
+    }
+
+    public void OnFingerDataReceived(int fingerCount)
+    {
+        switch (fingerCount)
+        {
+            case 3:
+                Shoot();
+                break;
+            case 4:
+                Pause();
+                break;
+            // add more mappings as you like…
+            default:
+                // e.g. move/rotate or ignore
+                break;
+        }
+    }
 
     
 }
