@@ -11,6 +11,7 @@ public partial class bullet : Node3D
 
 	private float timer = 0;
     private bool isWaiting = false;
+	private bool hasHit = false;
 
 
 	// Called by the player's Shoot method to set the bullet's travel direction.
@@ -43,11 +44,16 @@ public partial class bullet : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		if (hasHit)
+            return;
+
 		Position += Transform.Basis * new Vector3(0, 0, -Speed) * (float)delta;
 		//GD.Print("Bullet position: " + GlobalTransform.Origin);
 
 		if (Ray.IsColliding())
 		{
+			hasHit = true;
+
 			Mesh.Visible = false;
 			Particles.Emitting = true;
 
@@ -76,6 +82,10 @@ public partial class bullet : Node3D
 						else if (hitArea.IsInGroup("OuterCircle"))
 						{
 							GD.Print("Hit Outer Circle! +2 points");
+						}
+						else
+						{
+							GD.Print("Hit something else!");
 						}
 					}
 				}
