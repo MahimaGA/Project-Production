@@ -2,10 +2,7 @@ import cv2
 import mediapipe as mp
 import utility as util
 import pyautogui as pg
-import socket
-import time
 
-#setting up mediapipe
 mphands = mp.solutions.hands
 hands = mphands.Hands(
     static_image_mode= False,
@@ -15,34 +12,9 @@ hands = mphands.Hands(
     max_num_hands = 1
 )
 
-
-#setting up TCP client 
-HOST, PORT = "127.0.0.1", 65432
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-for attempt in range(10):
-    try:
-        sock.connect((HOST, PORT))
-        print("Connected to Godot TCP server.")
-        break
-    except ConnectionRefusedError:
-        print(f"Attempt {attempt+1}/10: server not up yet, retrying in 0.5s...")
-        time.sleep(0.5)
-else:
-    raise RuntimeError("Could not connect to Godot server on port 65432")
-
-prev_px, prev_py = None, None
-
-
-def send_motion(dx, dy):
-    """Send delta‐motion as 'dx,dy' over TCP."""
-    msg = f"{dx},{dy}".encode("utf-8")
-    sock.sendall(msg)
-
-
 def isshoot(landmarks_list, thumb_to_index):
     return (util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90 and 
-            util.getangle(landmarks_list[9], landmarks_list[10], landmarks_list[12]) < 50 and
+            util.getangle(landmarks_list[9], landmarks_list[10], landmarks_list[12]) < 40 and
             thumb_to_index < 75 )
 
 def move_mouse(index_finger_tip):
@@ -52,8 +24,6 @@ def move_mouse(index_finger_tip):
         pg.moveTo(x, y) #move to x,y on screen
 
 def detect_gestures(frame, landmarks_list, processed, shooting_state):
-    global prev_px, prev_py
-
     if len(landmarks_list) >= 21:
         
         index_finger_tip = find_tip(processed)
@@ -61,24 +31,14 @@ def detect_gestures(frame, landmarks_list, processed, shooting_state):
         
         #aim (curosr movement)
         if thumb_to_index > 75 and util.getangle(landmarks_list[5], landmarks_list[6], landmarks_list[8]) > 90:
-            # convert to screen pixels
-            px = int(index_finger_tip.x * pg.size().width)
-            py = int(index_finger_tip.y * pg.size().height)
-
-            if prev_px is not None and prev_py is not None:
-                dx, dy = px - prev_px, py - prev_py
-                send_motion(dx, dy)
-
-            prev_px, prev_py = px, py
-            
-            #move_mouse(index_finger_tip)
+            move_mouse(index_finger_tip)
             shooting_state[0] = False
             cv2.putText(frame, "Aiming", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
-        #shoot (enter key)
+        #shoot (left click)
         elif isshoot(landmarks_list, thumb_to_index):
             if not shooting_state[0]:  # only shoot on first detection
-                pg.press('enter')
+                pg.click()
                 shooting_state[0] = True            
                 cv2.putText(frame, "Shooting", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
