@@ -13,7 +13,7 @@ height = 2.5
 script = ExtResource("1_52e5s")
 Speed = 3.0
 Camera = NodePath("CameraController/Camera3D")
-MouseSensitivity = 0.4
+MouseSensitivity = 0.01
 Raycast = NodePath("CameraController/Camera3D/RayCast3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -29,7 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.669294, 0)
 
 [node name="RayCast3D" type="RayCast3D" parent="CameraController/Camera3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-target_position = Vector3(5, 0, 0)
+target_position = Vector3(15, 0, 0)
 collide_with_areas = true
 script = ExtResource("3_cwin8")
 

@@ -1,16 +1,16 @@
-[gd_scene load_steps=35 format=4 uid="uid://bmo2jiepg7s61"]
+[gd_scene load_steps=35 format=4 uid="uid://ll4i4i0pas2n"]
 
-[ext_resource type="Script" path="res://scripts/controller.cs" id="1_p4lo2"]
-[ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_2ly7m"]
-[ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="2_xpb53"]
-[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="3_ou8n0"]
-[ext_resource type="PackedScene" uid="uid://c84by808e7lo7" path="res://scenes/bullet.tscn" id="3_ttv70"]
-[ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="4_nlb6t"]
-[ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="5_53ytl"]
-[ext_resource type="Script" path="res://scripts/debug.cs" id="6_8y04y"]
-[ext_resource type="Script" path="res://scripts/newgame.cs" id="8_sgit1"]
-[ext_resource type="Script" path="res://scripts/Continue.cs" id="9_eq6cr"]
-[ext_resource type="Script" path="res://scripts/exit.cs" id="9_vd0qr"]
+[ext_resource type="Script" path="res://scripts/controller.cs" id="1_x2rpb"]
+[ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_bwyy8"]
+[ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="3_j88vw"]
+[ext_resource type="PackedScene" uid="uid://c84by808e7lo7" path="res://scenes/bullet.tscn" id="4_kw6ap"]
+[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="5_ngg6g"]
+[ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="6_aoigq"]
+[ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="7_3pkn8"]
+[ext_resource type="Script" path="res://scripts/debug.cs" id="8_ib7e1"]
+[ext_resource type="Script" path="res://scripts/newgame.cs" id="9_cxqay"]
+[ext_resource type="Script" path="res://scripts/Continue.cs" id="10_4tg8p"]
+[ext_resource type="Script" path="res://scripts/exit.cs" id="11_44a1q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -170,7 +170,7 @@ shadow_mesh = SubResource("ArrayMesh_wptjh")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcviw"]
 
 [node name="Node3D2" type="Node3D"]
-script = ExtResource("1_p4lo2")
+script = ExtResource("1_x2rpb")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4pakn")
@@ -190,13 +190,13 @@ mesh = SubResource("PlaneMesh_6uvj3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3DFloor"]
 shape = SubResource("BoxShape3D_qpqx1")
 
-[node name="Sketchfab_Scene" parent="Floor" instance=ExtResource("2_2ly7m")]
+[node name="Sketchfab_Scene" parent="Floor" instance=ExtResource("2_bwyy8")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 0.380526, -7)
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("2_xpb53")]
-transform = Transform3D(-0.99991, 0, 0.0134385, 0, 1, 0, -0.0134385, 0, -0.99991, 1.95067, -0.884341, -10.0665)
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_j88vw")]
+transform = Transform3D(-0.99991, 0, 0.0134385, 0, 1, 0, -0.0134385, 0, -0.99991, -3.04539, -0.884341, -10.0665)
 collision_layer = 1023
-Bullet = ExtResource("3_ttv70")
+Bullet = ExtResource("4_kw6ap")
 pauseMenu = NodePath("../PauseMenu")
 
 [node name="Interface" type="Control" parent="."]
@@ -221,7 +221,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_ou8n0")
+script = ExtResource("5_ngg6g")
 CrosshairLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
 PlayerController = NodePath("../../CharacterBody3D")
 
@@ -248,9 +248,9 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
 offset_bottom = 50.0
-theme = ExtResource("4_nlb6t")
-theme_override_styles/panel = ExtResource("5_53ytl")
-script = ExtResource("6_8y04y")
+theme = ExtResource("6_aoigq")
+theme_override_styles/panel = ExtResource("7_3pkn8")
+script = ExtResource("8_ib7e1")
 PropertyContainer = NodePath("MarginContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="Interface/DebugPanel"]
@@ -299,13 +299,13 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Restart Game"
-script = ExtResource("8_sgit1")
+script = ExtResource("9_cxqay")
 
 [node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Continue"
-script = ExtResource("9_eq6cr")
+script = ExtResource("10_4tg8p")
 pauseMenu = NodePath("../../..")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
@@ -317,10 +317,10 @@ text = "Mute/Unmute"
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
-script = ExtResource("9_vd0qr")
+script = ExtResource("11_44a1q")
 
 [node name="Target" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.74723, 0, 4)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Target" groups=["OuterCircle"]]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
@@ -353,84 +353,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.4773
 shape = SubResource("CylinderShape3D_g2ynt")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target/StaticBody3D3/Inner"]
-radius = 0.2
-height = 0.6
-sides = 64
-material = SubResource("StandardMaterial3D_davnk")
-
-[node name="Target2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.448675, 0, 4)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Target2" groups=["OuterCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Outer" type="CollisionShape3D" parent="Target2/StaticBody3D"]
-shape = SubResource("CylinderShape3D_geqhk")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target2/StaticBody3D/Outer"]
-radius = 0.6
-height = 0.2
-sides = 64
-material = SubResource("StandardMaterial3D_cgujl")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Target2" groups=["MiddleCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Middle" type="CollisionShape3D" parent="Target2/StaticBody3D2"]
-shape = SubResource("CylinderShape3D_146o3")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target2/StaticBody3D2/Middle"]
-radius = 0.4
-height = 0.4
-sides = 64
-material = SubResource("StandardMaterial3D_cnfyh")
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="Target2" groups=["InnerCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Inner" type="CollisionShape3D" parent="Target2/StaticBody3D3"]
-shape = SubResource("CylinderShape3D_g2ynt")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target2/StaticBody3D3/Inner"]
-radius = 0.2
-height = 0.6
-sides = 64
-material = SubResource("StandardMaterial3D_davnk")
-
-[node name="Target3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.415, 0, 4.5)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Target3" groups=["OuterCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Outer" type="CollisionShape3D" parent="Target3/StaticBody3D"]
-shape = SubResource("CylinderShape3D_geqhk")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target3/StaticBody3D/Outer"]
-radius = 0.6
-height = 0.2
-sides = 64
-material = SubResource("StandardMaterial3D_cgujl")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="Target3" groups=["MiddleCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Middle" type="CollisionShape3D" parent="Target3/StaticBody3D2"]
-shape = SubResource("CylinderShape3D_146o3")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target3/StaticBody3D2/Middle"]
-radius = 0.4
-height = 0.4
-sides = 64
-material = SubResource("StandardMaterial3D_cnfyh")
-
-[node name="StaticBody3D3" type="StaticBody3D" parent="Target3" groups=["InnerCircle"]]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.47731, 0, -1.81382)
-
-[node name="Inner" type="CollisionShape3D" parent="Target3/StaticBody3D3"]
-shape = SubResource("CylinderShape3D_g2ynt")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Target3/StaticBody3D3/Inner"]
 radius = 0.2
 height = 0.6
 sides = 64
