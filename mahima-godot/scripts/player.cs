@@ -15,7 +15,6 @@ public partial class player : CharacterBody3D
 	[Export] public PackedScene Bullet;
 
 	[Export] public CanvasLayer pauseMenu;
-	[Export] public NodePath tcppath;
 
 	public float Gravity = 9.8f;
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
@@ -27,14 +26,25 @@ public partial class player : CharacterBody3D
 	public Vector3 PlayerRotation;
 	public Vector3 CameraRotation;
 
+	private Vector2 _lastMousePosition;
+
 	public override void _Ready()
 	{			
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+		_lastMousePosition = GetViewport().GetMousePosition();
+	}
 
-		var _tcp = GetNode<TcpReceiver>(tcppath);
+	public override void _Process(double delta)
+	{
+		Vector2 currentMousePosition = GetViewport().GetMousePosition();
+		Vector2 mouseDelta = currentMousePosition - _lastMousePosition;
 
-		_tcp.Connect("CameraMotionReceived", new Callable(this, nameof(OnCameraMotion)));
-		_tcp.Connect("FingerDataReceived",    new Callable(this, nameof(OnFingerDataReceived)));
+		AxisX = mouseDelta.X;
+		AxisY = mouseDelta.Y;
+
+		UpdateCamera(delta);
+
+		_lastMousePosition = currentMousePosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -43,7 +53,6 @@ public partial class player : CharacterBody3D
 		//creating property then updates every frame
 		// global.DebugInstance.AddProperty("MovementSpeed", Speed.ToString() , 1);
 		// global.DebugInstance.AddProperty("MouseRotation", MouseRotation.ToString() , 2); //prints x,y,z position of cursor
-		UpdateCamera(delta);
 
 		Vector3 velocity = Velocity;
 
@@ -85,35 +94,38 @@ public partial class player : CharacterBody3D
 		MoveAndSlide();
 	}
 
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is InputEventMouseMotion mouseEvent)
-		{
-			if(Input.MouseMode == Input.MouseModeEnum.Captured)
-			{
-				MouseInput = true;
-				AxisX = -mouseEvent.Relative.Y * MouseSensitivity;
-				AxisY = -mouseEvent.Relative.X * MouseSensitivity;
-				//GD.Print(AxisX," ",AxisY);
-			}
-			else
-			{
-				GD.Print("Mouse is not captured.");
-			}
-			
-		}
-		else
-        {
-            //GD.Print("Condition not met.");
-        }
-	}
+	
+	//public override void _UnhandledInput(InputEvent @event)
+	//{
+	//	if (@event is InputEventMouseMotion mouseEvent)
+	//	{
+	//		if(Input.MouseMode == Input.MouseModeEnum.Visible)
+	//		{
+	//			MouseInput = true;
+	//			AxisX = mouseEvent.Relative.X * MouseSensitivity;
+	//			AxisY = mouseEvent.Relative.Y * MouseSensitivity;
+	//			GD.Print(AxisX," ",AxisY);
+	//		}
+	//		else
+	//		{
+	//			GD.Print("Mouse is not captured.");
+	//		}
+	//		
+	//	}
+	//	else
+    //    {
+    //        //GD.Print("Condition not met.");
+    //    }
+	//}
 
 	public void UpdateCamera(double delta)
 	{
-		MouseRotation.Y += (float)(AxisY * delta); 
+		MouseRotation.Y += (float)(-AxisX * delta * MouseSensitivity); 
 
-		MouseRotation.X += (float)(AxisX * delta);
+		MouseRotation.X += (float)(-AxisY * delta * MouseSensitivity);
+		
 		MouseRotation.Y = Mathf.Clamp(MouseRotation.Y,TiltLowerLimit, TiltUpperLimit);
+		MouseRotation.X = Mathf.Clamp(MouseRotation.X,TiltLowerLimit, TiltUpperLimit);
 
         PlayerRotation = new Vector3(0.0f, MouseRotation.Y, 0.0f);
 		CameraRotation = new Vector3(MouseRotation.X, 0.0f, 0.0f);

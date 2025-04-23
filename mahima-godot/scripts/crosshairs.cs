@@ -32,7 +32,7 @@ public partial class crosshairs : CenterContainer
 		{
 			Vector3 Vel = PlayerController.GetRealVelocity();
 			Origin= new Vector3 (0.0f, 0.0f, 0.0f);
-			Pos= new Vector2 (0.0f, 0.0f);
+			Pos= new Vector2 (17.0f, 17.0f);
 			Speed = Origin.DistanceTo(Vel);
 		}
 	}
@@ -45,7 +45,7 @@ public partial class crosshairs : CenterContainer
 
     public override void _Draw()
     {
-        DrawCircle(new Vector2(0.0f, 0.0f), DotRadius, DotColor);
+        DrawCircle(new Vector2(17.0f, 17.0f), DotRadius, DotColor);
     }
 
     public override void _UnhandledInput(InputEvent @event)

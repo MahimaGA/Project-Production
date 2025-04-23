@@ -25,6 +25,7 @@ public partial class bullet : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Ray.Enabled = true;
 	}
 
 	public override void _Process(double delta)
@@ -47,54 +48,37 @@ public partial class bullet : Node3D
 		if (hasHit)
             return;
 
-		Position += Transform.Basis * new Vector3(0, 0, -Speed) * (float)delta;
-		//GD.Print("Bullet position: " + GlobalTransform.Origin);
+			Position += Transform.Basis * new Vector3(0, 0, -Speed) * (float)delta;
+			//GD.Print("Bullet position: " + GlobalTransform.Origin);
 
-		if (Ray.IsColliding())
-		{
-			hasHit = true;
-
-			Mesh.Visible = false;
-			Particles.Emitting = true;
-
-			// Get the collider
-            if (Ray.IsColliding())
+			if (Ray.IsColliding())
 			{
-    			GodotObject colliderObj = Ray.GetCollider();
-				
-				// Cast the collider to a Node3D (or Area3D)
-				if (colliderObj is Node3D collider)
+				hasHit = true;
+
+				Mesh.Visible = false;
+				Particles.Emitting = true;
+
+				GodotObject colliderObj = Ray.GetCollider();
+				//GD.Print($"Collider type: {colliderObj?.GetType()}");
+
+				if (colliderObj is Node3D hitArea)
 				{
-					GD.Print($"Raycast hit: {collider.Name}");
-					// Ensure we are hitting an Area3D
-					if (collider is StaticBody3D hitArea)
-					{
-						GD.Print($"Bullet hit: {hitArea.Name}");
+					GD.Print($"Raycast hit: {hitArea.Name}");
 
-						if (hitArea.IsInGroup("InnerCircle"))
-						{
-							GD.Print("Hit Inner Circle! +10 points");
-						}
-						else if (hitArea.IsInGroup("MiddleCircle"))
-						{
-							GD.Print("Hit Middle Circle! +5 points");
-						}
-						else if (hitArea.IsInGroup("OuterCircle"))
-						{
-							GD.Print("Hit Outer Circle! +2 points");
-						}
-						else
-						{
-							GD.Print("Hit something else!");
-						}
-					}
+					if (hitArea.IsInGroup("InnerCircle"))
+						GD.Print("Hit Inner Circle! +10 points");
+					else if (hitArea.IsInGroup("MiddleCircle"))
+						GD.Print("Hit Middle Circle! +5 points");
+					else if (hitArea.IsInGroup("OuterCircle"))
+						GD.Print("Hit Outer Circle! +2 points");
+					else
+						GD.Print("Hit something else!");
 				}
+
+				// Start the timer but keep the bullet moving
+				isWaiting = true;
+				timer = 2.0f;
+
 			}
-
-			// Start the timer but keep the bullet moving
-            isWaiting = true;
-            timer = 2.0f;
-
-		}
 	}
 }
