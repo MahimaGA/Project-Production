@@ -380,8 +380,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -55.5
+offset_top = 25.0
 offset_right = 55.5
-offset_bottom = 114.0
+offset_bottom = 139.0
 grow_horizontal = 2
 
 [node name="BulletsLabel" type="Label" parent="ScoreManager/Score/VBoxContainer"]
