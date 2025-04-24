@@ -16,6 +16,14 @@ public partial class player : CharacterBody3D
 
 	[Export] public CanvasLayer pauseMenu;
 
+    [Export] public CanvasLayer ScoreCanvas;
+
+	public Label bulletsLabel;
+    public Label scoreLabel;
+
+	public int BulletsShot { get; private set; } = 0;
+    public int Score { get; private set; } = 0;
+
 	public float Gravity = 9.8f;
 	public Vector3 MouseRotation = new Vector3(0.0f,0.0f,0.0f);
 	
@@ -32,6 +40,11 @@ public partial class player : CharacterBody3D
 	{			
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		_lastMousePosition = GetViewport().GetMousePosition();
+
+		bulletsLabel = ScoreCanvas.GetNode<Label>("BulletsLabel");
+        scoreLabel   = ScoreCanvas.GetNode<Label>("ScoreLabel");
+
+        RefreshUI();
 	}
 
 	public override void _Process(double delta)
@@ -140,7 +153,8 @@ public partial class player : CharacterBody3D
 
 	public void Shoot()
 	{
-		// Instance the bullet scene
+		ScoreManager.Instance.BulletFired();
+
         Node3D bullet = (Node3D)Bullet.Instantiate();
 
 		// Set the bullet's starting position at the camera's position.
@@ -159,7 +173,7 @@ public partial class player : CharacterBody3D
 		}
 
 		Vector3 direction = (targetPosition - bullet.GlobalTransform.Origin).Normalized();
-		GD.Print("Bullet direction: " + direction);
+		//GD.Print("Bullet direction: " + direction);
 		bullet.Call("Initialize", direction);
 
 
@@ -197,5 +211,16 @@ public partial class player : CharacterBody3D
         }
     }
 
+	public void AddScore(int points)
+    {
+        Score += points;
+        RefreshUI();
+    }
+
+	public void RefreshUI()
+    {
+        bulletsLabel.Text = $"Bullets: {BulletsShot}";
+        scoreLabel.Text = $"Score: {Score}";
+    }
     
 }

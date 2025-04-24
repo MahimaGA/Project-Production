@@ -7,11 +7,12 @@ public partial class bullet : Node3D
 	[Export] Node3D Mesh;
 	[Export] RayCast3D Ray;
 	[Export] GpuParticles3D Particles;
+	
 	public Vector3 Direction = Vector3.Zero;
 
-	private float timer = 0;
-    private bool isWaiting = false;
-	private bool hasHit = false;
+	public float timer = 0;
+    public bool isWaiting = false;
+	public bool hasHit = false;
 
 
 	// Called by the player's Shoot method to set the bullet's travel direction.
@@ -26,6 +27,9 @@ public partial class bullet : Node3D
 	public override void _Ready()
 	{
 		Ray.Enabled = true;
+
+		if (ScoreManager.Instance == null)
+            GD.PushWarning("No ScoreManager.Instance found in the scene!");
 	}
 
 	public override void _Process(double delta)
@@ -44,41 +48,62 @@ public partial class bullet : Node3D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
-	{
-		if (hasHit)
+    {
+        if (hasHit)
             return;
 
-			Position += Transform.Basis * new Vector3(0, 0, -Speed) * (float)delta;
-			//GD.Print("Bullet position: " + GlobalTransform.Origin);
+        Position += Transform.Basis * new Vector3(0, 0, -Speed) * (float)delta;
 
-			if (Ray.IsColliding())
+        if (Ray.IsColliding())
+        {
+            hasHit = true;
+            Mesh.Visible = false;
+            Particles.Emitting = true;
+
+            Node colliderNode = Ray.GetCollider() as Node;
+			if (colliderNode == null)
 			{
-				hasHit = true;
+				GD.Print("Raycast hit something non-Node!");
+			}
+			else
+			{
+				GD.Print($"Raycast hit: {colliderNode.Name}");
 
-				Mesh.Visible = false;
-				Particles.Emitting = true;
-
-				GodotObject colliderObj = Ray.GetCollider();
-				//GD.Print($"Collider type: {colliderObj?.GetType()}");
-
-				if (colliderObj is Node3D hitArea)
+				// 4) Climb up until we find one of your scoring groups
+				Node current = colliderNode;
+				bool scored   = false;
+				while (current != null)
 				{
-					GD.Print($"Raycast hit: {hitArea.Name}");
-
-					if (hitArea.IsInGroup("InnerCircle"))
+					if (current.IsInGroup("InnerCircle"))
+					{
 						GD.Print("Hit Inner Circle! +10 points");
-					else if (hitArea.IsInGroup("MiddleCircle"))
+						ScoreManager.Instance.AddPoints(10);
+						scored = true;
+						break;
+					}
+					else if (current.IsInGroup("MiddleCircle"))
+					{
 						GD.Print("Hit Middle Circle! +5 points");
-					else if (hitArea.IsInGroup("OuterCircle"))
+						ScoreManager.Instance.AddPoints(5);
+						scored = true;
+						break;
+					}
+					else if (current.IsInGroup("OuterCircle"))
+					{
 						GD.Print("Hit Outer Circle! +2 points");
-					else
-						GD.Print("Hit something else!");
+						ScoreManager.Instance.AddPoints(2);
+						scored = true;
+						break;
+					}
+					current = current.GetParent();
 				}
 
-				// Start the timer but keep the bullet moving
-				isWaiting = true;
-				timer = 2.0f;
-
+				if (!scored)
+					GD.Print("Hit something else!");
 			}
-	}
+
+            isWaiting = true;
+            timer = 2.0f;
+        }
+    }
 }
