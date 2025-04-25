@@ -17,6 +17,8 @@ public partial class player : CharacterBody3D
 	[Export] public CanvasLayer pauseMenu;
 
     [Export] public CanvasLayer ScoreCanvas;
+	[Export] public AudioStreamPlayer3D shootAudio;
+
 
 	public Label bulletsLabel;
     public Label scoreLabel;
@@ -34,7 +36,7 @@ public partial class player : CharacterBody3D
 	public Vector3 PlayerRotation;
 	public Vector3 CameraRotation;
 
-	private Vector2 _lastMousePosition;
+	public Vector2 _lastMousePosition;
 
 	public override void _Ready()
 	{			
@@ -83,6 +85,7 @@ public partial class player : CharacterBody3D
 
 		if (Input.IsActionJustPressed("shoot"))
 		{
+			shootAudio?.Play();
 			Shoot();
 		}
 

@@ -1,20 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg1hcfdorug5v"]
+[gd_scene load_steps=7 format=3 uid="uid://bg1hcfdorug5v"]
 
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_52e5s"]
 [ext_resource type="PackedScene" uid="uid://c6o0x1jrp1qhp" path="res://assets/gun/small_gun.glb" id="2_cl6oa"]
 [ext_resource type="Script" path="res://scripts/raycast3d.cs" id="3_cwin8"]
+[ext_resource type="AudioStream" uid="uid://dqvfa64me0av2" path="res://assets/audios/556 Single WAV.wav" id="4_1t7fp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyds6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_x2el5"]
 height = 2.5
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Camera", "Raycast")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Camera", "Raycast", "shootAudio")]
 script = ExtResource("1_52e5s")
 Speed = 3.0
 Camera = NodePath("CameraController/Camera3D")
 MouseSensitivity = 0.01
 Raycast = NodePath("CameraController/Camera3D/RayCast3D")
+shootAudio = NodePath("shootaudio")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_jyds6")
@@ -41,3 +43,6 @@ update_mode = 1
 
 [node name="Sketchfab_Scene" parent="CameraController/Camera3D/Weapon" instance=ExtResource("2_cl6oa")]
 transform = Transform3D(-2.18557e-10, 0, -0.005, 0, 0.005, 0, 0.005, 0, -2.18557e-10, 0.45, -1.1, -1)
+
+[node name="shootaudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_1t7fp")
