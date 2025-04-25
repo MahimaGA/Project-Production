@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=4 uid="uid://gxjjurb00738"]
+[gd_scene load_steps=14 format=4 uid="uid://gxjjurb00738"]
 
+[ext_resource type="Script" path="res://scripts/target.cs" id="1_fwegn"]
 [ext_resource type="Script" path="res://scripts/MeshToCollision.cs" id="2_ft37v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vur8n"]
@@ -123,8 +124,10 @@ shadow_mesh = SubResource("ArrayMesh_4rvge")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_la4hl"]
 
-[node name="Target" type="Node3D"]
+[node name="Target" type="Node3D" node_paths=PackedStringArray("Visual")]
 transform = Transform3D(0.003, 0, 0, 0, 0.003, 0, 0, 0, 0.003, 0, 0, 0)
+script = ExtResource("1_fwegn")
+Visual = NodePath(".")
 
 [node name="Cylinder_001" type="Node3D" parent="." groups=["OuterCircle"]]
 transform = Transform3D(-1.28806e-05, -4.80086e-05, 10.9565, -294.675, -1.7564e-05, -4.78926e-07, 1.7564e-05, -294.675, -1.78505e-06, -2.74163, 0.0162549, 0.941679)

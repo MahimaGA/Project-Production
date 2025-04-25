@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using MahimaGodot.Scripts;
 
 public partial class bullet : Node3D
 {
@@ -98,7 +99,18 @@ public partial class bullet : Node3D
 				}
 
 				if (!scored)
-					GD.Print("Hit something else!");
+					GD.Print("MISSED!");
+
+				current = colliderNode;
+				while (current != null)
+				{
+					if (current is target t)
+					{
+						t.ToggleVisibility();
+						break;
+					}
+					current = current.GetParent();
+				}
 			}
 
             isWaiting = true;
