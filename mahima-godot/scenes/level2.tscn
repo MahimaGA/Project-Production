@@ -204,27 +204,36 @@ transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0,
 
 [node name="Score" type="CanvasLayer" parent="ScoreManager"]
 script = ExtResource("13_8stsr")
+StartingBullets = 5
+MinimumScore = 9
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScoreManager/Score"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -55.5
-offset_top = 25.0
-offset_right = 55.5
-offset_bottom = 139.0
-grow_horizontal = 2
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_right = -19.0
+offset_bottom = 173.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+alignment = 2
 
 [node name="BulletsLabel" type="Label" parent="ScoreManager/Score/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="ScoreManager/Score/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-horizontal_alignment = 1
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MinimumScoreLabel" type="Label" parent="ScoreManager/Score/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
