@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="9_eq6cr"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="9_vd0qr"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="12_hyclo"]
-[ext_resource type="Script" path="res://scripts/score.cs" id="12_m3115"]
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="14_qdnji"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
@@ -78,6 +77,29 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_husbl")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n5jcu"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_8opcn"]
+script/source = "using Godot;
+using System;
+
+public partial class score : Area3D
+{
+	[Export] public int Points = 0;
+
+	// Called when something enters the Area
+	public void OnBodyEntered(Node3D body)
+	{
+		// GD.Print($\"Body entered: {body.Name}\");
+		// // Only react to your bullet type
+		// if (body is bullet b)
+		// {
+		//     GD.Print($\"Bullet hit zone for {Points} points!\");
+		//     ScoreManager.Instance.AddPoints(Points);
+		//     b.QueueFree();   // remove bullet on hit
+		// }
+	}
+}
+"
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jcviw"]
 
@@ -326,7 +348,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_n5jcu")
 
 [node name="Area3D" type="Area3D" parent="Targetnew/Cylinder_001/Cylinder_001_Material_0"]
-script = ExtResource("12_m3115")
+script = SubResource("CSharpScript_8opcn")
 Points = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targetnew/Cylinder_001/Cylinder_001_Material_0/Area3D"]
@@ -345,7 +367,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_yykql")
 
 [node name="Area3D" type="Area3D" parent="Targetnew/Cylinder_002/Cylinder_002_Material_001_0"]
-script = ExtResource("12_m3115")
+script = SubResource("CSharpScript_8opcn")
 Points = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targetnew/Cylinder_002/Cylinder_002_Material_001_0/Area3D"]
@@ -364,7 +386,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_jcviw")
 
 [node name="Area3D" type="Area3D" parent="Targetnew/Cylinder_003/Cylinder_003_Material_0/StaticBody3D"]
-script = ExtResource("12_m3115")
+script = SubResource("CSharpScript_8opcn")
 Points = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targetnew/Cylinder_003/Cylinder_003_Material_0/StaticBody3D/Area3D"]

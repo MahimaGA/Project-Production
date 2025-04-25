@@ -84,8 +84,6 @@ public partial class player : CharacterBody3D
 		if (Input.IsActionJustPressed("shoot"))
 		{
 			Shoot();
-			GD.Print("SHOOT");
-
 		}
 
 		// Get the input direction and handle the movement/deceleration.

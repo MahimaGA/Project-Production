@@ -22,6 +22,7 @@ driver/driver="OpenAL"
 [autoload]
 
 GameManager="*res://scripts/GameManager.cs"
+ScoreManager="*res://scripts/ScoreManager.cs"
 
 [display]
 

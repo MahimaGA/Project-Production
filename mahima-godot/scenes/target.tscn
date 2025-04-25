@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=4 uid="uid://gxjjurb00738"]
+[gd_scene load_steps=13 format=4 uid="uid://gxjjurb00738"]
 
-[ext_resource type="Script" path="res://scripts/score.cs" id="1_onu8l"]
 [ext_resource type="Script" path="res://scripts/MeshToCollision.cs" id="2_ft37v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vur8n"]
@@ -135,8 +134,6 @@ mesh = SubResource("ArrayMesh_qd4pi")
 skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="Cylinder_001/Cylinder_001_Material_0"]
-script = ExtResource("1_onu8l")
-Points = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_001/Cylinder_001_Material_0/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_kdpk3")
@@ -153,8 +150,6 @@ mesh = SubResource("ArrayMesh_cwdur")
 skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="Cylinder_002/Cylinder_002_Material_001_0"]
-script = ExtResource("1_onu8l")
-Points = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_002/Cylinder_002_Material_001_0/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_megj2")
@@ -172,8 +167,6 @@ skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="Cylinder_003/Cylinder_003_Material_0"]
 transform = Transform3D(1, 0, -3.25109e-16, 0, 1, 0, -2.08791e-14, 0, 1, 0, 0, 0)
-script = ExtResource("1_onu8l")
-Points = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_003/Cylinder_003_Material_0/Area3D"]
 shape = SubResource("ConvexPolygonShape3D_la4hl")
@@ -181,7 +174,3 @@ shape = SubResource("ConvexPolygonShape3D_la4hl")
 [node name="Node3D" type="Node3D" parent="Cylinder_003"]
 script = ExtResource("2_ft37v")
 MeshInstancePath = NodePath("../Cylinder_003_Material_0")
-
-[connection signal="body_entered" from="Cylinder_001/Cylinder_001_Material_0/Area3D" to="Cylinder_001/Cylinder_001_Material_0/Area3D" method="OnBodyEntered"]
-[connection signal="body_entered" from="Cylinder_002/Cylinder_002_Material_001_0/Area3D" to="Cylinder_001/Cylinder_001_Material_0/Area3D" method="OnBodyEntered"]
-[connection signal="body_entered" from="Cylinder_003/Cylinder_003_Material_0/Area3D" to="Cylinder_001/Cylinder_001_Material_0/Area3D" method="OnBodyEntered"]

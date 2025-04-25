@@ -67,9 +67,8 @@ public partial class bullet : Node3D
 			}
 			else
 			{
-				GD.Print($"Raycast hit: {colliderNode.Name}");
+				//GD.Print($"Raycast hit: {colliderNode.Name}");
 
-				// 4) Climb up until we find one of your scoring groups
 				Node current = colliderNode;
 				bool scored   = false;
 				while (current != null)

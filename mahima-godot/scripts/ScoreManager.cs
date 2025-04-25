@@ -4,6 +4,8 @@ using System;
 
 public partial class ScoreManager : CanvasLayer
 {
+	[Export] public int StartingBullets = 10;
+
 	// static singleton reference
 	public static ScoreManager Instance { get; private set; }
 
@@ -12,6 +14,7 @@ public partial class ScoreManager : CanvasLayer
 
 	public int Score { get; private set; } = 0;
 	public int BulletsShot  { get; private set; } = 0;
+	public int BulletsRemaining;
 
 
 	public override void _Ready()
@@ -22,6 +25,7 @@ public partial class ScoreManager : CanvasLayer
         _scoreLabel   = vbox.GetNode<Label>("ScoreLabel");
         _bulletsLabel = vbox.GetNode<Label>("BulletsLabel");
 		
+		BulletsRemaining = StartingBullets;
 		RefreshUI();
 
 	}
@@ -36,8 +40,14 @@ public partial class ScoreManager : CanvasLayer
 	public void BulletFired()
     {
         BulletsShot++;
+		BulletsRemaining = BulletsRemaining - 1;
         RefreshUI();
         GD.Print($"Bullets Shot: {BulletsShot}");
+
+		if (BulletsRemaining == 0)
+        {
+            GetTree().ChangeSceneToFile("res://scenes/end_game.tscn");
+        }
     }
 
 	public void ResetAll()
@@ -51,7 +61,7 @@ public partial class ScoreManager : CanvasLayer
 	public void RefreshUI()
     {
         _scoreLabel.Text   = $"Score: {Score}";
-        _bulletsLabel.Text = $"Bullets: {BulletsShot}";
+        _bulletsLabel.Text = $"Bullets Left: {BulletsRemaining}";
     }
 	
 }
