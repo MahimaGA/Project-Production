@@ -184,8 +184,6 @@ public partial class player : CharacterBody3D
 	{
 		GetTree().Paused = true;
 		pauseMenu.Show();
-		Input.MouseMode = Input.MouseModeEnum.Visible;
-
 	}
 
 	public void OnCameraMotion(float dx, float dy)

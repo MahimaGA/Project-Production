@@ -3,8 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="1_cacne"]
 
 [resource]
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 10
-MarginContainer/constants/margin_right = 10
-MarginContainer/constants/margin_top = 10
+default_font_size = 20
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 40
+MarginContainer/constants/margin_top = 20
 PanelContainer/styles/panel = ExtResource("1_cacne")

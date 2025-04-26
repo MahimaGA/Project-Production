@@ -12,13 +12,7 @@ public partial class debug : PanelContainer
 	{
 		AddInstructions();
 
-    	// var global = (globalscript)GetNode("/root/Global");
-    	// global.DebugInstance = this;
-
-		PropertyContainer = GetNode<VBoxContainer>("MarginContainer/VBoxContainer"); // Ensure this path is correct
-		//Visible = false;
-    	// fpsLabel = AddDebugProperty("FPS", fps);	
-
+		PropertyContainer = GetNode<VBoxContainer>("MarginContainer/VBoxContainer"); 
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +26,7 @@ public partial class debug : PanelContainer
 
     public override void _Input(InputEvent @event)
     {
-		if (Input.IsActionJustPressed("debug")) //`~ button
+		if (Input.IsActionJustPressed("debug")) // ` backquote button
 		{
 			Visible= !Visible;
 		}
@@ -79,8 +73,9 @@ public partial class debug : PanelContainer
 
 	public void AddInstructions()
 	{
-		AddProperty("P", "Pause the game", 0);
-		AddProperty("ESC", "Exit the game", 1);
+		AddProperty("P", "Pause the game", 1);
+		AddProperty("I", "See Instructions", 2);
+		AddProperty("ESC", "Exit the game", 3);
 	}
 
 

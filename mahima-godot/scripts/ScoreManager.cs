@@ -8,6 +8,7 @@ public partial class ScoreManager : CanvasLayer
 	[Export] public int MinimumScore = 10; 
 
 	[Export] public CanvasLayer gameover;
+	[Export] public CanvasLayer instructions;
 
 
 	// static singleton reference
@@ -17,7 +18,7 @@ public partial class ScoreManager : CanvasLayer
 	private Label _bulletsLabel;
 	private Label _minimumScoreLabel;
 
-	public int Score { get; private set; } = 0;
+	public int Score { get; private set; } = 00;
 	public int BulletsShot  { get; private set; } = 0;
 	public int BulletsRemaining;
 
@@ -70,9 +71,23 @@ public partial class ScoreManager : CanvasLayer
 	{
 		GetTree().Paused = true;
 		gameover.Show();
-		Input.MouseMode = Input.MouseModeEnum.Visible;
 
 	}
+
+	public void Instructions()
+	{
+		if (instructions.Visible)
+		{
+			instructions.Hide();
+			GetTree().Paused = false;
+		}
+		else
+		{
+			GetTree().Paused = true;
+			instructions.Show();
+		}
+	}
+
 	public void ResetAll()
     {
         Score = 0;
