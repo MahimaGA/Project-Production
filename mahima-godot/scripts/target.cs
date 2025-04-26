@@ -19,7 +19,7 @@ namespace MahimaGodot.Scripts
 		public async void ToggleVisibility()
 		{
 			Visual.Visible = !Visual.Visible;
-			float respawnTime = 5.0f;
+			float respawnTime = 6.5f;
 			await ToSignal(GetTree().CreateTimer(respawnTime), "timeout");
 			Visual.Visible = !Visual.Visible;
 		}

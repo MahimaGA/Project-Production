@@ -12,6 +12,8 @@ public partial class nextlevel : Button
 		int nextLevel = GameManager.Instance.CurrentLevel + 1;
 		_nextLevelPath = "res://scenes/level" + nextLevel + ".tscn";
 
+		GameManager.Instance.CurrentLevel = nextLevel;
+
 		Pressed += OnPressed;
 
 	}

@@ -7,6 +7,9 @@ public partial class ScoreManager : CanvasLayer
 	[Export] public int StartingBullets = 10;
 	[Export] public int MinimumScore = 10; 
 
+	[Export] public CanvasLayer gameover;
+
+
 	// static singleton reference
 	public static ScoreManager Instance { get; private set; }
 
@@ -40,7 +43,7 @@ public partial class ScoreManager : CanvasLayer
 		GD.Print($"New Score: {Score}");
 	}
 
-	public void BulletFired()
+	public async void BulletFired()
     {
         BulletsShot++;
 		BulletsRemaining--;
@@ -49,6 +52,9 @@ public partial class ScoreManager : CanvasLayer
 
 		if (BulletsRemaining == 0)
         {
+			GameOver();
+			await ToSignal(GetTree().CreateTimer(3.5f), "timeout");
+
 			if (Score >= MinimumScore)
 			{
 				GetTree().ChangeSceneToFile("res://scenes/win_end_game.tscn");
@@ -60,6 +66,13 @@ public partial class ScoreManager : CanvasLayer
 		}
     }
 
+	public void GameOver()
+	{
+		GetTree().Paused = true;
+		gameover.Show();
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+
+	}
 	public void ResetAll()
     {
         Score = 0;
