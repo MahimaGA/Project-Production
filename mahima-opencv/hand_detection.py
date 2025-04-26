@@ -1,7 +1,16 @@
+import os
+import time
 import cv2
 import mediapipe as mp
 import utility as util
 import pyautogui as pg
+
+# — suppress all TensorFlow/Mediapipe logs —
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+os.environ["GLOG_minloglevel"] = "2"
+from absl import logging
+logging.set_verbosity(logging.ERROR)
+
 
 mphands = mp.solutions.hands
 hands = mphands.Hands(
@@ -54,12 +63,15 @@ def find_tip(processed):
     return None
 
 def main():
-    capture = cv2.VideoCapture(0) #using primary camera=0
+    capture = cv2.VideoCapture(0, cv2.CAP_DSHOW) #using primary camera=0, low resolution
     draw = mp.solutions.drawing_utils #draws landmarks
 
     #resolution size
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
+    for _ in range(20):
+        capture.grab()
 
     shooting = [False] #list form so that we can change inside a function
 

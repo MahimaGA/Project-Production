@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/restart.cs" id="2_pk317"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="3_2hpx7"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("allScoresLabel", "allTargetsLabel")]
+[node name="Control2" type="Control" node_paths=PackedStringArray("allScoresLabel", "allTargetsLabel")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
