@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://3b142h7wqs5b"]
+[gd_scene load_steps=4 format=3 uid="uid://3b142h7wqs5b"]
 
 [ext_resource type="Script" path="res://scripts/restart.cs" id="1_dujyq"]
+[ext_resource type="Script" path="res://scripts/endgame.cs" id="1_s76qb"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_k6h5s"]
 
 [node name="Control" type="Control"]
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_s76qb")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -39,7 +41,7 @@ horizontal_alignment = 1
 [node name="Score" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Score: "
+text = "Your Score: "
 
 [node name="TargetsHit" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2

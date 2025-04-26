@@ -1,0 +1,402 @@
+[gd_scene load_steps=27 format=3 uid="uid://dkgvrggsv56gc"]
+
+[ext_resource type="Script" path="res://scripts/controller.cs" id="1_t6q0w"]
+[ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_3ey48"]
+[ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="3_r62gc"]
+[ext_resource type="PackedScene" uid="uid://c84by808e7lo7" path="res://scenes/bullet.tscn" id="4_gry3h"]
+[ext_resource type="Script" path="res://scripts/crosshairs.cs" id="5_4egjd"]
+[ext_resource type="Theme" uid="uid://vk27nc7ijye5" path="res://themes/debug.tres" id="6_fytp7"]
+[ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="7_ydxai"]
+[ext_resource type="Script" path="res://scripts/debug.cs" id="8_0mgsq"]
+[ext_resource type="Script" path="res://scripts/newgame.cs" id="9_bv2h2"]
+[ext_resource type="Script" path="res://scripts/Continue.cs" id="10_fus3t"]
+[ext_resource type="Script" path="res://scripts/exit.cs" id="11_ejr3t"]
+[ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="12_gwqw5"]
+[ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_y2678"]
+[ext_resource type="Script" path="res://scripts/instructions.cs" id="14_2jqm7"]
+[ext_resource type="Texture2D" uid="uid://btbsg8lmr2570" path="res://assets/images/aiming.png" id="15_lh4ok"]
+[ext_resource type="Texture2D" uid="uid://b4kgdfbd8nxe5" path="res://assets/images/idle.png" id="16_gef0s"]
+[ext_resource type="Texture2D" uid="uid://baq8wrr33j33e" path="res://assets/images/shoot.png" id="17_2agh1"]
+[ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="18_1p5sn"]
+[ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="19_ev1lh"]
+[ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="20_4so4p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6w18"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_aren2"]
+sky_material = SubResource("ProceduralSkyMaterial_d6w18")
+
+[sub_resource type="Environment" id="Environment_4pakn"]
+background_mode = 2
+sky = SubResource("Sky_aren2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cth7w"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6uvj3"]
+material = SubResource("StandardMaterial3D_cth7w")
+size = Vector2(40, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
+size = Vector3(60, 1, 60)
+
+[node name="Node3D2" type="Node3D"]
+script = ExtResource("1_t6q0w")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4pakn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 4, 0)
+light_color = Color(1, 1, 0.541176, 1)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.11073, 7)
+layers = 1023
+mesh = SubResource("PlaneMesh_6uvj3")
+
+[node name="StaticBody3DFloor" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3DFloor"]
+shape = SubResource("BoxShape3D_qpqx1")
+
+[node name="Sketchfab_Scene" parent="Floor" instance=ExtResource("2_3ey48")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 0.380526, -7)
+
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_r62gc")]
+transform = Transform3D(-0.99991, 0, 0.0134385, 0, 1, 0, -0.0134385, 0, -0.99991, -3.04539, -0.884341, -10.0665)
+collision_layer = 1023
+Bullet = ExtResource("4_gry3h")
+pauseMenu = NodePath("../PauseMenu")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Interface" node_paths=PackedStringArray("CrosshairLines", "PlayerController")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_4egjd")
+CrosshairLines = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PlayerController = NodePath("../../CharacterBody3D")
+
+[node name="Top" type="Line2D" parent="Interface/CenterContainer"]
+points = PackedVector2Array(0, -10, 0, -25)
+width = 5.0
+
+[node name="Right" type="Line2D" parent="Interface/CenterContainer"]
+points = PackedVector2Array(10, 0, 25, 0)
+width = 5.0
+
+[node name="Bottom" type="Line2D" parent="Interface/CenterContainer"]
+points = PackedVector2Array(0, 10, 0, 25)
+width = 5.0
+
+[node name="Left" type="Line2D" parent="Interface/CenterContainer"]
+points = PackedVector2Array(-10, 0, -25, 0)
+width = 5.0
+
+[node name="DebugPanel" type="PanelContainer" parent="Interface" node_paths=PackedStringArray("PropertyContainer")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("6_fytp7")
+theme_override_styles/panel = ExtResource("7_ydxai")
+script = ExtResource("8_0mgsq")
+PropertyContainer = NodePath("MarginContainer/VBoxContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="Interface/DebugPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/DebugPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 2
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -171.0
+offset_right = 160.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="PauseMenu" type="Label" parent="PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "PAUSE MENU
+
+"
+horizontal_alignment = 1
+
+[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Restart Game"
+script = ExtResource("9_bv2h2")
+
+[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Continue"
+script = ExtResource("10_fus3t")
+pauseMenu = NodePath("../../..")
+
+[node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Mute/Unmute"
+
+[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+script = ExtResource("11_ejr3t")
+
+[node name="Targets List" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39727, 0.0934809, 0)
+
+[node name="Target" parent="Targets List" instance=ExtResource("12_gwqw5")]
+transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0, 0.000244824, 4.42226, 0.00482653, 1.42449)
+
+[node name="Target2" parent="Targets List" instance=ExtResource("12_gwqw5")]
+transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0, 0.000244824, -1.6167, 0.00482653, 1.42449)
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Score" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
+script = ExtResource("13_y2678")
+StartingBullets = 3
+gameover = NodePath("GameOver")
+instructions = NodePath("Instructions")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_right = -19.0
+offset_bottom = 173.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+alignment = 2
+
+[node name="BulletsLabel" type="Label" parent="UI/Score/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MinimumScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="GameOver" type="CanvasLayer" parent="UI/Score"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="UI/Score/GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Score/GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -171.0
+offset_right = 160.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/GameOver/CenterContainer"]
+layout_mode = 2
+
+[node name="GAMEOVER" type="Label" parent="UI/Score/GameOver/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "GAME OVER
+
+"
+horizontal_alignment = 1
+
+[node name="Instructions" type="CanvasLayer" parent="UI/Score"]
+visible = false
+script = ExtResource("14_2jqm7")
+
+[node name="ColorRect" type="ColorRect" parent="UI/Score/Instructions"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/Instructions"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Instructions" type="Label" parent="UI/Score/Instructions/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "INSTRUCTIONS
+
+
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Score/Instructions/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Signs" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Aim" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Aim
+
+
+"
+
+[node name="Aiming" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
+position = Vector2(230, 30)
+scale = Vector2(2, 2)
+texture = ExtResource("15_lh4ok")
+
+[node name="Hold" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Hold
+
+
+"
+
+[node name="Idle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
+position = Vector2(230, 30)
+scale = Vector2(2, 2)
+texture = ExtResource("16_gef0s")
+
+[node name="Shoot" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Shoot
+
+
+"
+
+[node name="Shoot" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
+position = Vector2(230, 30)
+scale = Vector2(2, 2)
+texture = ExtResource("17_2agh1")
+
+[node name="Scores" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="2" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "2 points
+
+
+"
+
+[node name="Outer" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/2"]
+position = Vector2(400, 40)
+texture = ExtResource("18_1p5sn")
+
+[node name="5" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "5 points
+
+
+"
+
+[node name="Middle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/5"]
+position = Vector2(400, 40)
+texture = ExtResource("19_ev1lh")
+
+[node name="10" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "10 points
+
+
+"
+
+[node name="Inner" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/10"]
+position = Vector2(400, 40)
+texture = ExtResource("20_4so4p")
+
+[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Continue" to="PauseMenu/CenterContainer/VBoxContainer/Continue" method="Unpause"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" to="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" method="OnPressed"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Exit" to="PauseMenu/CenterContainer/VBoxContainer/Exit" method="OnPressed"]

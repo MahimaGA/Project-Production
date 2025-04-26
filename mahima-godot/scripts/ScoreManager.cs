@@ -41,7 +41,7 @@ public partial class ScoreManager : CanvasLayer
 	{
 		Score += pts;
         RefreshUI();
-		GD.Print($"New Score: {Score}");
+		//GD.Print($"New Score: {Score}");
 	}
 
 	public async void BulletFired()
@@ -53,13 +53,26 @@ public partial class ScoreManager : CanvasLayer
 
 		if (BulletsRemaining == 0)
         {
+			await ToSignal(GetTree().CreateTimer(2.0f), "timeout");
 			GameOver();
-			await ToSignal(GetTree().CreateTimer(3.5f), "timeout");
+			await ToSignal(GetTree().CreateTimer(2.0f), "timeout");
+			GetTree().Paused = false;
+
 
 			if (Score >= MinimumScore)
 			{
-				GetTree().ChangeSceneToFile("res://scenes/win_end_game.tscn");
+				GameManager.Instance.SaveCurrentLevelResult(Score, BulletsShot);
+
+            	if (GameManager.Instance.CurrentLevel >= GameManager.Instance.TotalLevels)
+				{
+					GetTree().ChangeSceneToFile("res://scenes/gamecomplete.tscn");
+				}
+				else
+				{
+					GetTree().ChangeSceneToFile("res://scenes/win_end_game.tscn");
+				}			
 			}
+
 			else
 			{
 				GetTree().ChangeSceneToFile("res://scenes/lose_end_game.tscn");
