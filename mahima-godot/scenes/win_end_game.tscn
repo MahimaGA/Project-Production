@@ -13,59 +13,53 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gl85u")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -250.0
+offset_top = -161.0
+offset_right = 250.0
+offset_bottom = 162.0
+theme_override_constants/separation = 40
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-layout_mode = 2
-
-[node name="LevelComplete" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="LevelComplete" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "LEVEL COMPLETE
-
 "
 horizontal_alignment = 1
 
-[node name="Score" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Score" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Your Score: "
 
-[node name="TargetsHit" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="TargetsHit" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Targets Hit:
+text = "Targets Hit:"
 
-"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="NextLevel" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="NextLevel" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Next Level"
 script = ExtResource("1_cavkl")
 
-[node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+[node name="MainMenu" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 script = ExtResource("2_le38h")
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NextLevel" to="CenterContainer/VBoxContainer/HBoxContainer/NextLevel" method="OnPressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" to="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NextLevel" to="VBoxContainer/HBoxContainer/NextLevel" method="OnPressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MainMenu" to="VBoxContainer/HBoxContainer/MainMenu" method="OnPressed"]

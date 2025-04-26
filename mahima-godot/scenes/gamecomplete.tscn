@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr4xf46cnye2c"]
+
+[ext_resource type="Script" path="res://scripts/gamecomplete.cs" id="1_bysjr"]
+[ext_resource type="Script" path="res://scripts/restart.cs" id="2_pk317"]
+[ext_resource type="Script" path="res://scripts/mainmenu.cs" id="3_2hpx7"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("allScoresLabel", "allTargetsLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bysjr")
+allScoresLabel = NodePath("CenterContainer/HBoxContainer2/Score/AllScores")
+allTargetsLabel = NodePath("CenterContainer/HBoxContainer2/TargetsHit/AllTargets")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameComplete" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "GAME COMPLETE
+
+
+
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/GameComplete"]
+layout_mode = 2
+offset_top = 500.0
+offset_right = 416.0
+offset_bottom = 550.0
+
+[node name="Restart" type="Button" parent="CenterContainer/GameComplete/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+script = ExtResource("2_pk317")
+
+[node name="MainMenu" type="Button" parent="CenterContainer/GameComplete/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+script = ExtResource("3_2hpx7")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Level" type="Label" parent="CenterContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "
+Level     "
+
+[node name="LevelNumbers" type="Label" parent="CenterContainer/HBoxContainer2/Level"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 38.0
+offset_bottom = 312.0
+theme_override_font_sizes/font_size = 30
+text = "1
+2
+3
+4
+5"
+
+[node name="Score" type="Label" parent="CenterContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "
+Your Score     "
+
+[node name="AllScores" type="Label" parent="CenterContainer/HBoxContainer2/Score"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 78.0
+offset_bottom = 312.0
+theme_override_font_sizes/font_size = 30
+text = "1
+2
+3
+4
+5"
+
+[node name="TargetsHit" type="Label" parent="CenterContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "
+Targets Hit"
+
+[node name="AllTargets" type="Label" parent="CenterContainer/HBoxContainer2/TargetsHit"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 78.0
+offset_bottom = 312.0
+theme_override_font_sizes/font_size = 30
+text = "1
+2
+3
+4
+5"
+
+[connection signal="pressed" from="CenterContainer/GameComplete/HBoxContainer/Restart" to="CenterContainer/GameComplete/HBoxContainer/Restart" method="OnPressed"]
+[connection signal="pressed" from="CenterContainer/GameComplete/HBoxContainer/MainMenu" to="CenterContainer/GameComplete/HBoxContainer/MainMenu" method="OnPressed"]

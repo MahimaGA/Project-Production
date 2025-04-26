@@ -11,7 +11,7 @@ public partial class restart : Button
 		GrabFocus();
 
         int currentLevel = GameManager.Instance.CurrentLevel;
-        _currentLevelPath = "res://scenes/level"+ currentLevel +".tscn";
+        _currentLevelPath = "res://scenes/levels/level"+ currentLevel +".tscn";
 
         Pressed += OnPressed;
 	}

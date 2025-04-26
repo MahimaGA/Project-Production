@@ -10,12 +10,11 @@ public partial class mainmenu : Button
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GrabFocus();
 	}
 
 	private void OnPressed()
 	{
-		// Go to main menu
+		//go to main menu
         GetTree().ChangeSceneToFile(menupath);
 	}
 }

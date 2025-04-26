@@ -10,7 +10,7 @@ public partial class nextlevel : Button
 		GrabFocus();
 
 		int nextLevel = GameManager.Instance.CurrentLevel + 1;
-		_nextLevelPath = "res://scenes/level" + nextLevel + ".tscn";
+		_nextLevelPath = "res://scenes/levels/level" + nextLevel + ".tscn";
 
 		GameManager.Instance.CurrentLevel = nextLevel;
 

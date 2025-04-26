@@ -63,13 +63,18 @@ public partial class ScoreManager : CanvasLayer
 			{
 				GameManager.Instance.SaveCurrentLevelResult(Score, BulletsShot);
 
-            	if (GameManager.Instance.CurrentLevel >= GameManager.Instance.TotalLevels)
+            	// if (GameManager.Instance.CurrentLevel >= GameManager.Instance.TotalLevels)
+				// {
+				// 	GetTree().ChangeSceneToFile("res://scenes/gamecomplete.tscn");
+				// }
+				if (GameManager.Instance.CurrentLevel == GameManager.Instance.TotalLevels)
 				{
 					GetTree().ChangeSceneToFile("res://scenes/gamecomplete.tscn");
 				}
 				else
 				{
 					GetTree().ChangeSceneToFile("res://scenes/win_end_game.tscn");
+
 				}			
 			}
 
