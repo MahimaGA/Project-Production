@@ -74,7 +74,7 @@ transform = Transform3D(-0.99991, 0, 0.0134385, 0, 1, 0, -0.0134385, 0, -0.99991
 collision_layer = 1023
 Bullet = ExtResource("4_5lsym")
 pauseMenu = NodePath("../PauseMenu")
-ScoreCanvas = NodePath("../UI/Score")
+ScoreCanvas = NodePath("../UI/ScoreManager")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
@@ -198,14 +198,14 @@ script = ExtResource("11_kxvxx")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Score" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
+[node name="ScoreManager" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
 script = ExtResource("12_6n6te")
 StartingBullets = 5
 MinimumScore = 9
 gameover = NodePath("GameOver")
 instructions = NodePath("Instructions")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -216,28 +216,28 @@ grow_horizontal = 0
 size_flags_horizontal = 10
 alignment = 2
 
-[node name="BulletsLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="BulletsLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MinimumScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="MinimumScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="GameOver" type="CanvasLayer" parent="UI/Score"]
+[node name="GameOver" type="CanvasLayer" parent="UI/ScoreManager"]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="UI/Score/GameOver"]
+[node name="ColorRect" type="ColorRect" parent="UI/ScoreManager/GameOver"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -245,7 +245,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.192157, 0.360784, 0.513726, 0.74902)
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/Score/GameOver"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/ScoreManager/GameOver"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -258,10 +258,10 @@ offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/GameOver/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager/GameOver/CenterContainer"]
 layout_mode = 2
 
-[node name="GAMEOVER" type="Label" parent="UI/Score/GameOver/CenterContainer/VBoxContainer"]
+[node name="GAMEOVER" type="Label" parent="UI/ScoreManager/GameOver/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 text = "GAME OVER
@@ -269,10 +269,10 @@ text = "GAME OVER
 "
 horizontal_alignment = 1
 
-[node name="Instructions" type="CanvasLayer" parent="UI/Score"]
+[node name="Instructions" type="CanvasLayer" parent="UI/ScoreManager"]
 script = ExtResource("13_uyq8m")
 
-[node name="ColorRect" type="ColorRect" parent="UI/Score/Instructions"]
+[node name="ColorRect" type="ColorRect" parent="UI/ScoreManager/Instructions"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -280,7 +280,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.192157, 0.360784, 0.513726, 0.74902)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/Instructions"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager/Instructions"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -294,7 +294,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Instructions" type="Label" parent="UI/Score/Instructions/VBoxContainer"]
+[node name="Instructions" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "INSTRUCTIONS
@@ -303,15 +303,15 @@ text = "INSTRUCTIONS
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Score/Instructions/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Signs" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+[node name="Signs" type="VBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Aim" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Aim" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Aim
@@ -319,12 +319,12 @@ text = "Aim
 
 "
 
-[node name="Aiming" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
+[node name="Aiming" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
 position = Vector2(230, 30)
 scale = Vector2(2, 2)
 texture = ExtResource("14_q80e6")
 
-[node name="Hold" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Hold" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Hold
@@ -332,12 +332,12 @@ text = "Hold
 
 "
 
-[node name="Idle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
+[node name="Idle" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
 position = Vector2(230, 30)
 scale = Vector2(2, 2)
 texture = ExtResource("15_lrul2")
 
-[node name="Shoot" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Shoot" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Shoot
@@ -345,16 +345,16 @@ text = "Shoot
 
 "
 
-[node name="Shoot" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
+[node name="Shoot" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
 position = Vector2(230, 30)
 scale = Vector2(2, 2)
 texture = ExtResource("16_midkg")
 
-[node name="Scores" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+[node name="Scores" type="VBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="2" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="2" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "2 points
@@ -362,11 +362,11 @@ text = "2 points
 
 "
 
-[node name="Outer" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/2"]
+[node name="Outer" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/2"]
 position = Vector2(400, 40)
 texture = ExtResource("17_lxn6s")
 
-[node name="5" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="5" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "5 points
@@ -374,11 +374,11 @@ text = "5 points
 
 "
 
-[node name="Middle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/5"]
+[node name="Middle" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/5"]
 position = Vector2(400, 40)
 texture = ExtResource("18_jrh31")
 
-[node name="10" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="10" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "10 points
@@ -386,9 +386,15 @@ text = "10 points
 
 "
 
-[node name="Inner" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/10"]
+[node name="Inner" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/10"]
 position = Vector2(400, 40)
 texture = ExtResource("19_iliau")
+
+[node name="Exit" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "I : To play"
+horizontal_alignment = 1
 
 [node name="Targets List" type="Node3D" parent="."]
 

@@ -1,15 +1,10 @@
 import os
-import time
 import cv2
 import mediapipe as mp
 import utility as util
 import pyautogui as pg
 
-# — suppress all TensorFlow/Mediapipe logs —
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-os.environ["GLOG_minloglevel"] = "2"
-from absl import logging
-logging.set_verbosity(logging.ERROR)
+FLAG_PATH = "D:/Project-Production/mahima-opencv/exit.flag"
 
 
 mphands = mp.solutions.hands
@@ -78,6 +73,8 @@ def main():
     try:
         while capture.isOpened():
             ret, frame = capture.read() #return(true/false), framedata
+            if os.path.exists(FLAG_PATH):
+                break
 
             if not ret:
                 break
@@ -106,6 +103,9 @@ def main():
     finally:
         capture.release() #release
         cv2.destroyAllWindows() #destroy
+
+        if os.path.exists(FLAG_PATH):
+            os.remove(FLAG_PATH)
 
 if __name__ == '__main__':
     main()

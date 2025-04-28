@@ -10,6 +10,9 @@ public partial class python : MeshInstance3D
 {
 	public string scriptPath = "D:/Project-Production/mahima-opencv/hand_detection.py";
 	public string pythonPath = "D:/Project-Production/mahima-opencv/.venv/Scripts/python.exe";
+	public Process _pythonProcess;
+
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -32,13 +35,21 @@ public partial class python : MeshInstance3D
 				CreateNoWindow      = true
 			};
 		
-			using Process process = Process.Start(start);
+			_pythonProcess = new Process
+            {
+                StartInfo          = start,
+                EnableRaisingEvents = true
+            };
 
-			string error = process.StandardError.ReadToEnd();
-            //process.WaitForExit();
+			_pythonProcess.ErrorDataReceived += (s, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                    GD.PrintErr($"PYTHON ERROR: {e.Data}");
+            };
 
-			if (!string.IsNullOrEmpty(error))
-				GD.PrintRich($"PYTHON ERROR[/color]: {error}");
+			_pythonProcess.Start();
+            _pythonProcess.BeginErrorReadLine();
+
 		}
 		catch (Exception e)
 		{
@@ -46,5 +57,22 @@ public partial class python : MeshInstance3D
 		}
 		
 	}
+
+	public void StopPython()
+    {
+        try
+        {
+            if (_pythonProcess != null && !_pythonProcess.HasExited)
+            {
+                _pythonProcess.Kill();
+                _pythonProcess.WaitForExit();
+                GD.Print("Python process terminated");
+            }
+        }
+        catch (Exception e)
+        {
+            GD.PrintErr($"ERROR STOPPING PYTHON: {e.Message}");
+        }
+    }
 
 }

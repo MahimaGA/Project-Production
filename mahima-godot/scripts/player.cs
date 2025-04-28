@@ -108,30 +108,6 @@ public partial class player : CharacterBody3D
 		MoveAndSlide();
 	}
 
-	
-	//public override void _UnhandledInput(InputEvent @event)
-	//{
-	//	if (@event is InputEventMouseMotion mouseEvent)
-	//	{
-	//		if(Input.MouseMode == Input.MouseModeEnum.Visible)
-	//		{
-	//			MouseInput = true;
-	//			AxisX = mouseEvent.Relative.X * MouseSensitivity;
-	//			AxisY = mouseEvent.Relative.Y * MouseSensitivity;
-	//			GD.Print(AxisX," ",AxisY);
-	//		}
-	//		else
-	//		{
-	//			GD.Print("Mouse is not captured.");
-	//		}
-	//		
-	//	}
-	//	else
-    //    {
-    //        //GD.Print("Condition not met.");
-    //    }
-	//}
-
 	public void UpdateCamera(double delta)
 	{
 		MouseRotation.Y += (float)(-AxisX * delta * MouseSensitivity); 
@@ -192,24 +168,6 @@ public partial class player : CharacterBody3D
         AxisY = -dx * MouseSensitivity;
         AxisX = -dy * MouseSensitivity;
     }
-
-    public void OnFingerDataReceived(int fingerCount)
-    {
-        switch (fingerCount)
-        {
-            case 3:
-                Shoot();
-                break;
-            case 4:
-                Pause();
-                break;
-            // add more mappings as you like…
-            default:
-                // e.g. move/rotate or ignore
-                break;
-        }
-    }
-
 	public void AddScore(int points)
     {
         Score += points;

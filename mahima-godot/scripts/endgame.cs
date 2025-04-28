@@ -8,8 +8,7 @@ public partial class endgame : Control
 
     public override void _Ready()
     {
-		var centerContainer = GetNode<CenterContainer>("CenterContainer");
-        var vbox = centerContainer.GetNode<VBoxContainer>("VBoxContainer");
+        var vbox = GetNode<VBoxContainer>("VBoxContainer");
 
         scoreLabel = vbox.GetNode<Label>("Score");
         targetsHitLabel = vbox.GetNode<Label>("TargetsHit");
