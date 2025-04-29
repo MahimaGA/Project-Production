@@ -3,6 +3,7 @@ using System;
 
 public partial class restart : Button
 {
+    [Export] public AudioStreamPlayer buttonclick;
 	public string _currentLevelPath;
 
 	// Called when the node enters the scene tree for the first time.
@@ -18,8 +19,8 @@ public partial class restart : Button
 
 	 private void OnPressed()
     {
+        buttonclick.Play();
         GD.Print("Restarting level: " + _currentLevelPath);
-
         GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, _currentLevelPath);
     }
 }

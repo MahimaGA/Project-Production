@@ -3,6 +3,8 @@ using System.IO;
 
 public partial class exit : Button
 {
+    [Export] public AudioStreamPlayer buttonclick;
+
 	// Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -11,6 +13,7 @@ public partial class exit : Button
     // This method will be triggered when the Exit button is pressed
     private void OnPressed()
     {
+        buttonclick.Play();
         GD.Print("Exiting the game...");
         File.WriteAllText("D:/Project-Production/mahima-opencv/exit.flag", "");
 

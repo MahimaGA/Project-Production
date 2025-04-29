@@ -3,7 +3,7 @@ using System;
 
 public partial class mainmenu : Button
 {
-
+    [Export] public AudioStreamPlayer buttonclick;
 	string menupath = "res://scenes/menu.tscn";
 
 
@@ -14,6 +14,7 @@ public partial class mainmenu : Button
 
 	private void OnPressed()
 	{
+		buttonclick.Play();
 		//go to main menu
         GetTree().ChangeSceneToFile(menupath);
 	}

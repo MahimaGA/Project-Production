@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3b142h7wqs5b"]
+[gd_scene load_steps=5 format=3 uid="uid://3b142h7wqs5b"]
 
 [ext_resource type="Script" path="res://scripts/restart.cs" id="1_dujyq"]
 [ext_resource type="Script" path="res://scripts/endgame.cs" id="1_s76qb"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_k6h5s"]
+[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="4_aslld"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -24,6 +25,8 @@ offset_left = -250.0
 offset_top = -161.0
 offset_right = 250.0
 offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
@@ -47,19 +50,26 @@ text = "Targets Hit:"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Restart" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Restart" type="Button" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Restart"
 script = ExtResource("1_dujyq")
+buttonclick = NodePath("../../../Buttonclick")
 
-[node name="MainMenu" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="MainMenu" type="Button" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Main Menu"
 script = ExtResource("2_k6h5s")
+buttonclick = NodePath("../../../Buttonclick")
+
+[node name="Buttonclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_aslld")
+volume_db = 2.0
+pitch_scale = 5.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Restart" to="VBoxContainer/HBoxContainer/Restart" method="OnPressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MainMenu" to="VBoxContainer/HBoxContainer/MainMenu" method="OnPressed"]

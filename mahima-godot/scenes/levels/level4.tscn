@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dkgvrggsv56gc"]
+[gd_scene load_steps=29 format=3 uid="uid://dkgvrggsv56gc"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_t6q0w"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_3ey48"]
@@ -11,12 +11,11 @@
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="9_bv2h2"]
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="10_fus3t"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="11_ejr3t"]
+[ext_resource type="Script" path="res://scripts/mute.cs" id="11_sbtyj"]
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="12_gwqw5"]
+[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="12_lerc4"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_y2678"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="14_2jqm7"]
-[ext_resource type="Texture2D" uid="uid://btbsg8lmr2570" path="res://assets/images/aiming.png" id="15_lh4ok"]
-[ext_resource type="Texture2D" uid="uid://b4kgdfbd8nxe5" path="res://assets/images/idle.png" id="16_gef0s"]
-[ext_resource type="Texture2D" uid="uid://baq8wrr33j33e" path="res://assets/images/shoot.png" id="17_2agh1"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="18_1p5sn"]
 [ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="19_ev1lh"]
 [ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="20_4so4p"]
@@ -43,8 +42,18 @@ size = Vector2(40, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
 size = Vector3(60, 1, 60)
 
-[node name="Node3D2" type="Node3D"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ekby"]
+load_path = "res://.godot/imported/aiming.png-c88558b4c9e7c2a9cb91c1a6aa7ad114.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r3ark"]
+load_path = "res://.godot/imported/idle.png-e2921845828603945e934cef7bc737af.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t7ta2"]
+load_path = "res://.godot/imported/shoot.png-6dede5e0f1a10b574a68c66ffc9e6085.ctex"
+
+[node name="Node3D2" type="Node3D" node_paths=PackedStringArray("buttonclick")]
 script = ExtResource("1_t6q0w")
+buttonclick = NodePath("PauseMenu/Buttonclick")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4pakn")
@@ -67,11 +76,10 @@ shape = SubResource("BoxShape3D_qpqx1")
 [node name="Sketchfab_Scene" parent="Floor" instance=ExtResource("2_3ey48")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -6, 0.380526, -7)
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("pauseMenu") instance=ExtResource("3_r62gc")]
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_r62gc")]
 transform = Transform3D(-0.99991, 0, 0.0134385, 0, 1, 0, -0.0134385, 0, -0.99991, -3.04539, -0.884341, -10.0665)
 collision_layer = 1023
 Bullet = ExtResource("4_gry3h")
-pauseMenu = NodePath("../PauseMenu")
 
 [node name="Interface" type="Control" parent="."]
 layout_mode = 3
@@ -169,29 +177,38 @@ text = "PAUSE MENU
 "
 horizontal_alignment = 1
 
-[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Restart Game"
 script = ExtResource("9_bv2h2")
+buttonclick = NodePath("../../../Buttonclick")
 
-[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu")]
+[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu", "buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Continue"
 script = ExtResource("10_fus3t")
 pauseMenu = NodePath("../../..")
+buttonclick = NodePath("../../../Buttonclick")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Mute/Unmute"
+script = ExtResource("11_sbtyj")
 
-[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("11_ejr3t")
+buttonclick = NodePath("../../../Buttonclick")
+
+[node name="Buttonclick" type="AudioStreamPlayer" parent="PauseMenu"]
+stream = ExtResource("12_lerc4")
+volume_db = 2.0
+pitch_scale = 5.0
 
 [node name="Targets List" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.39727, 0.0934809, 0)
@@ -274,9 +291,10 @@ text = "GAME OVER
 "
 horizontal_alignment = 1
 
-[node name="Instructions" type="CanvasLayer" parent="UI/Score"]
+[node name="Instructions" type="CanvasLayer" parent="UI/Score" node_paths=PackedStringArray("buttonclick")]
 visible = false
 script = ExtResource("14_2jqm7")
+buttonclick = NodePath("../../../PauseMenu/Buttonclick")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Score/Instructions"]
 anchors_preset = 15
@@ -327,8 +345,8 @@ text = "Aim
 
 [node name="Aiming" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("15_lh4ok")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_2ekby")
 
 [node name="Hold" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
@@ -340,8 +358,8 @@ text = "Hold
 
 [node name="Idle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("16_gef0s")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_r3ark")
 
 [node name="Shoot" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
@@ -353,8 +371,8 @@ text = "Shoot
 
 [node name="Shoot" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("17_2agh1")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_t7ta2")
 
 [node name="Scores" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -398,5 +416,4 @@ texture = ExtResource("20_4so4p")
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Continue" to="PauseMenu/CenterContainer/VBoxContainer/Continue" method="Unpause"]
-[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" to="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Exit" to="PauseMenu/CenterContainer/VBoxContainer/Exit" method="OnPressed"]

@@ -2,6 +2,8 @@ using Godot;
 
 public partial class nextlevel : Button
 {
+	[Export] public AudioStreamPlayer buttonclick;
+
 	private string _nextLevelPath;
 
 	public override void _Ready()
@@ -20,7 +22,7 @@ public partial class nextlevel : Button
 
 	private void OnPressed()
 	{
-
+        buttonclick.Play();
 		GD.Print("Loading next level: " + _nextLevelPath);
 		// Go to next level
 		GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, _nextLevelPath);

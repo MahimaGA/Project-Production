@@ -3,6 +3,8 @@ using System;
 
 public partial class instructions : CanvasLayer
 {
+	[Export] public AudioStreamPlayer buttonclick;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -14,6 +16,7 @@ public partial class instructions : CanvasLayer
 	{
 		if (Input.IsActionJustPressed("instructions"))
 		{
+			buttonclick.Play();
 			ScoreManager.Instance.Instructions();
 		}
 		

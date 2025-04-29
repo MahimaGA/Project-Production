@@ -18,6 +18,7 @@ public partial class player : CharacterBody3D
 
     [Export] public CanvasLayer ScoreCanvas;
 	[Export] public AudioStreamPlayer3D shootAudio;
+	[Export] public AudioStreamPlayer buttonclick;
 
 
 	public Label bulletsLabel;
@@ -73,6 +74,7 @@ public partial class player : CharacterBody3D
 
 		if (Input.IsActionJustPressed("pause"))
 		{
+			buttonclick.Play();
 			Pause();
 		}
 

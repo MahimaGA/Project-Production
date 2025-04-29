@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bmo2jiepg7s61"]
+[gd_scene load_steps=30 format=3 uid="uid://bmo2jiepg7s61"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_fklcm"]
 [ext_resource type="Script" path="res://scripts/python.cs" id="2_44qo1"]
@@ -13,10 +13,9 @@
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="10_5mgva"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="11_kxvxx"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="12_6n6te"]
+[ext_resource type="Script" path="res://scripts/mute.cs" id="12_fqpyc"]
+[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="13_54rod"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="13_uyq8m"]
-[ext_resource type="Texture2D" uid="uid://btbsg8lmr2570" path="res://assets/images/aiming.png" id="14_q80e6"]
-[ext_resource type="Texture2D" uid="uid://b4kgdfbd8nxe5" path="res://assets/images/idle.png" id="15_lrul2"]
-[ext_resource type="Texture2D" uid="uid://baq8wrr33j33e" path="res://assets/images/shoot.png" id="16_midkg"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="17_lxn6s"]
 [ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="18_jrh31"]
 [ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="19_iliau"]
@@ -44,8 +43,18 @@ size = Vector2(40, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
 size = Vector3(60, 1, 60)
 
-[node name="Node3D2" type="Node3D"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h5233"]
+load_path = "res://.godot/imported/aiming.png-c88558b4c9e7c2a9cb91c1a6aa7ad114.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lw832"]
+load_path = "res://.godot/imported/idle.png-e2921845828603945e934cef7bc737af.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xt7cc"]
+load_path = "res://.godot/imported/shoot.png-6dede5e0f1a10b574a68c66ffc9e6085.ctex"
+
+[node name="Node3D2" type="Node3D" node_paths=PackedStringArray("buttonclick")]
 script = ExtResource("1_fklcm")
+buttonclick = NodePath("PauseMenu/Buttonclick")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4pakn")
@@ -172,29 +181,38 @@ text = "PAUSE MENU
 "
 horizontal_alignment = 1
 
-[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Restart Game"
 script = ExtResource("9_ejwqm")
+buttonclick = NodePath("../../../Buttonclick")
 
-[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu")]
+[node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu", "buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Continue"
 script = ExtResource("10_5mgva")
 pauseMenu = NodePath("../../..")
+buttonclick = NodePath("../../../Buttonclick")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Mute/Unmute"
+script = ExtResource("12_fqpyc")
 
-[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("11_kxvxx")
+buttonclick = NodePath("../../../Buttonclick")
+
+[node name="Buttonclick" type="AudioStreamPlayer" parent="PauseMenu"]
+stream = ExtResource("13_54rod")
+volume_db = 2.0
+pitch_scale = 5.0
 
 [node name="UI" type="Node" parent="."]
 
@@ -269,8 +287,9 @@ text = "GAME OVER
 "
 horizontal_alignment = 1
 
-[node name="Instructions" type="CanvasLayer" parent="UI/ScoreManager"]
+[node name="Instructions" type="CanvasLayer" parent="UI/ScoreManager" node_paths=PackedStringArray("buttonclick")]
 script = ExtResource("13_uyq8m")
+buttonclick = NodePath("../../../PauseMenu/Buttonclick")
 
 [node name="ColorRect" type="ColorRect" parent="UI/ScoreManager/Instructions"]
 anchors_preset = 15
@@ -321,8 +340,8 @@ text = "Aim
 
 [node name="Aiming" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("14_q80e6")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_h5233")
 
 [node name="Hold" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
@@ -334,8 +353,8 @@ text = "Hold
 
 [node name="Idle" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("15_lrul2")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_lw832")
 
 [node name="Shoot" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
@@ -347,8 +366,8 @@ text = "Shoot
 
 [node name="Shoot" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
 position = Vector2(230, 30)
-scale = Vector2(2, 2)
-texture = ExtResource("16_midkg")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("CompressedTexture2D_xt7cc")
 
 [node name="Scores" type="VBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -409,5 +428,4 @@ transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0,
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Continue" to="PauseMenu/CenterContainer/VBoxContainer/Continue" method="Unpause"]
-[connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" to="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Exit" to="PauseMenu/CenterContainer/VBoxContainer/Exit" method="OnPressed"]

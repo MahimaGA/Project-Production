@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr1tulfg1duk4"]
+[gd_scene load_steps=4 format=3 uid="uid://cr1tulfg1duk4"]
 
 [ext_resource type="Script" path="res://scripts/restart.cs" id="1_7xiam"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="2_qdsoj"]
+[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="3_6q430"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -48,22 +49,29 @@ text = "PAUSE MENU
 "
 horizontal_alignment = 1
 
-[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Restart Game"
 script = ExtResource("1_7xiam")
+buttonclick = NodePath("../../../../Buttonclick")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Mute/Unmute"
 
-[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("2_qdsoj")
+buttonclick = NodePath("../../../../Buttonclick")
+
+[node name="Buttonclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6q430")
+volume_db = 2.0
+pitch_scale = 5.0
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" to="PauseMenu/CenterContainer/VBoxContainer/Mute_Unmute" method="OnPressed"]

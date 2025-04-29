@@ -3,11 +3,7 @@ using System;
 
 public partial class controller : Node3D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-	}
+	[Export] public AudioStreamPlayer buttonclick;
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -16,6 +12,7 @@ public partial class controller : Node3D
 		// Quit the game with <Esc>
 		if (Input.IsActionJustPressed("Exit"))
 		{
+			buttonclick.Play();
 			GetTree().Quit();
 		}
 	}	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dppxqsw1wx0da"]
+[gd_scene load_steps=4 format=3 uid="uid://dppxqsw1wx0da"]
 
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="1_0q24i"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="2_ty1gp"]
+[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="3_db1vv"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -38,17 +39,24 @@ text = "MAIN MENU
 "
 horizontal_alignment = 1
 
-[node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "New Game"
 script = ExtResource("1_0q24i")
+buttonclick = NodePath("../../../Buttonclick")
 
-[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 script = ExtResource("2_ty1gp")
+buttonclick = NodePath("../../../Buttonclick")
+
+[node name="Buttonclick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_db1vv")
+volume_db = 2.0
+pitch_scale = 5.0
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NewGame" to="CenterContainer/VBoxContainer/NewGame" method="OnPressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Exit" to="CenterContainer/VBoxContainer/Exit" method="OnPressed"]
