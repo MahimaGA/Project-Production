@@ -4,12 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-
-
-public partial class python : MeshInstance3D
+public partial class startpython : MeshInstance3D
 {
 	public string scriptPath = "res://mahima-opencv/hand_detection.py";
-	public string pythonPath = "mahima-opencv/.venv/Scripts/python.exe";
+	public string pythonPath = "res://mahima-opencv/hand_detection.exe";
 
 	public Process _pythonProcess;
 
@@ -17,41 +15,43 @@ public partial class python : MeshInstance3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var scriptOsPath = ProjectSettings.GlobalizePath(scriptPath);
-		var pythonOsPath = ProjectSettings.GlobalizePath($"res://{pythonPath}");		// RunPython(assetPath:scriptOsPath);
+		AddToGroup("python_launcher");
 
+		var scriptOsPath = ProjectSettings.GlobalizePath(scriptPath);
+		var pythonOsPath = ProjectSettings.GlobalizePath($"res://{pythonPath}");
 		ThreadPool.QueueUserWorkItem(_ => RunPython(scriptOsPath, pythonOsPath));	
 	}
 
 	public override void _ExitTree()
     {
-        WriteExitFlag();
         StopPython();
         base._ExitTree();
     }
 
-	private void WriteExitFlag()
+	public void WriteExitFlag()
     {
-        // res://mahima-opencv/exit.flag → OS path
         var flagPath = ProjectSettings.GlobalizePath("res://mahima-opencv/exit.flag");
-        try
-        {
-            File.WriteAllText(flagPath, "");  
-            GD.Print($"[python.cs] Wrote exit flag → {flagPath}");
-        }
-        catch (Exception e)
-        {
-            GD.PrintErr($"Failed to write exit.flag: {e.Message}");
-        }
+    	File.WriteAllText(flagPath, "");
+    	GD.Print($"[startpython.cs] Wrote exit flag → {flagPath}");
     }
-	private void RunPython(string assetPath, string pythonExePath)
+	public void RunPython(string assetPath, string pythonExePath)
 	{
+		var exePath = ProjectSettings.GlobalizePath(pythonPath);
+		var exeDir  = Path.GetDirectoryName(exePath);
+
+		GD.Print($"[startpython.cs] launching → {exePath}");
+
+		if (!File.Exists(exePath))
+		{
+			GD.PrintErr($"Executable not found at {exePath}");
+			return;
+		}
 		try 
 		{
 			ProcessStartInfo start = new ProcessStartInfo
 			{
-				FileName            = pythonExePath,
-				Arguments           = $"{assetPath}",
+				FileName         = exePath,
+    			WorkingDirectory = exeDir,
 				UseShellExecute     = false,
 				RedirectStandardError = true,
 				CreateNoWindow      = true
@@ -81,14 +81,15 @@ public partial class python : MeshInstance3D
 	public void StopPython()
     {
         if (_pythonProcess != null && !_pythonProcess.HasExited)
-        {
-            // give Python a moment to see the file and exit cleanly
-            _pythonProcess.WaitForExit(500);  
-            if (!_pythonProcess.HasExited)
-                _pythonProcess.Kill();
+    {
+        _pythonProcess.WaitForExit(500);
 
-            GD.Print("Python process terminated");
+        if (!_pythonProcess.HasExited)
+        {
+            _pythonProcess.Kill(entireProcessTree: true);
         }
+			GD.Print("[startpython] Python process terminated");
+		}
     }
 
 }

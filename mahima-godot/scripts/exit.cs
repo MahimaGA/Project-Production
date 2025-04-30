@@ -15,8 +15,10 @@ public partial class exit : Button
     {
         buttonclick.Play();
         GD.Print("Exiting the game...");
-        File.WriteAllText("D:/Project-Production/mahima-opencv/exit.flag", "");
 
+        var flagPath = ProjectSettings.GlobalizePath("res://mahima-opencv/exit.flag");
+        File.WriteAllText(flagPath, "");
+    
         GetTree().Quit();
     }
 

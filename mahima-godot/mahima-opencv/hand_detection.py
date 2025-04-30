@@ -4,8 +4,7 @@ import mediapipe as mp
 import utility as util
 import pyautogui as pg
 
-FLAG_PATH = "D:/Project-Production/mahima-opencv/exit.flag"
-
+FLAG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "exit.flag")
 
 mphands = mp.solutions.hands
 hands = mphands.Hands(

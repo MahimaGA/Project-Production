@@ -1,8 +1,8 @@
 [gd_scene load_steps=30 format=3 uid="uid://bmo2jiepg7s61"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_fklcm"]
-[ext_resource type="Script" path="res://scripts/python.cs" id="2_44qo1"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_dpbb0"]
+[ext_resource type="Script" path="res://scripts/python.cs" id="2_fn4wb"]
 [ext_resource type="PackedScene" uid="uid://bg1hcfdorug5v" path="res://scenes/controller.tscn" id="3_bq28l"]
 [ext_resource type="PackedScene" uid="uid://c84by808e7lo7" path="res://scenes/bullet.tscn" id="4_5lsym"]
 [ext_resource type="Script" path="res://scripts/crosshairs.cs" id="5_ep4jo"]
@@ -68,7 +68,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.11073, 7)
 layers = 1023
 mesh = SubResource("PlaneMesh_6uvj3")
-script = ExtResource("2_44qo1")
+script = ExtResource("2_fn4wb")
 
 [node name="StaticBody3DFloor" type="StaticBody3D" parent="Floor"]
 

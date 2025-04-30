@@ -51,7 +51,7 @@ load_path = "res://.godot/imported/idle.png-e2921845828603945e934cef7bc737af.cte
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3hsaw"]
 load_path = "res://.godot/imported/shoot.png-6dede5e0f1a10b574a68c66ffc9e6085.ctex"
 
-[node name="Node3D2" type="Node3D" node_paths=PackedStringArray("buttonclick")]
+[node name="Node3D3" type="Node3D" node_paths=PackedStringArray("buttonclick")]
 script = ExtResource("1_yn0t4")
 buttonclick = NodePath("PauseMenu/Buttonclick")
 
