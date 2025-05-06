@@ -10,6 +10,9 @@
 __pycache__/
 .venv/
 **/.venv/
+venv/
+build/
+*.spec
 
 # Ignore PyInstaller build artifacts
 /mahima-godot/mahima-opencv/build/
