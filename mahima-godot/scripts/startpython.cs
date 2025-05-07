@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-public partial class startpython : MeshInstance3D
+public partial class Startpython : MeshInstance3D
 {
 	public string scriptPath = "res://mahima-opencv/hand_detection.py";
 	public string pythonPath = "res://mahima-opencv/hand_detection.exe";
