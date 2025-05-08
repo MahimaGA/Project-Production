@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dr4xf46cnye2c"]
 
 [ext_resource type="Script" path="res://scripts/gamecomplete.cs" id="1_bysjr"]
-[ext_resource type="Script" path="res://scripts/restart.cs" id="2_pk317"]
+[ext_resource type="Script" path="res://scripts/newgame.cs" id="2_8sh8q"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="3_2hpx7"]
 [ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="4_ropw2"]
 
@@ -46,13 +46,12 @@ offset_top = 500.0
 offset_right = 416.0
 offset_bottom = 550.0
 
-[node name="Restart" type="Button" parent="CenterContainer/GameComplete/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
+[node name="Restart" type="Button" parent="CenterContainer/GameComplete/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 text = "Restart"
-script = ExtResource("2_pk317")
-buttonclick = NodePath("../../../../Buttonclick")
+script = ExtResource("2_8sh8q")
 
 [node name="MainMenu" type="Button" parent="CenterContainer/GameComplete/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2

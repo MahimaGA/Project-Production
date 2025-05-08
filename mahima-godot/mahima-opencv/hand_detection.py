@@ -1,5 +1,6 @@
 import os
 import cv2
+import time
 import mediapipe as mp
 import utility as util
 import pyautogui as pg
@@ -64,8 +65,9 @@ def main():
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
-    for _ in range(20):
-        capture.grab()
+    for _ in range(10):
+        ret, _ = capture.read()
+        time.sleep(0.05)
 
     shooting = [False] #list form so that we can change inside a function
 

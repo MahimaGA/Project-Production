@@ -6,6 +6,7 @@ using System.Threading;
 
 public partial class Startpython : MeshInstance3D
 {
+	public bool isRunning = false;
 	public string scriptPath = "res://mahima-opencv/hand_detection.py";
 	public string pythonPath = "res://mahima-opencv/hand_detection.exe";
 
@@ -15,6 +16,10 @@ public partial class Startpython : MeshInstance3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		if (isRunning) 
+			return;
+
+		isRunning = true;   
 		AddToGroup("python_launcher");
 
 		var scriptOsPath = ProjectSettings.GlobalizePath(scriptPath);

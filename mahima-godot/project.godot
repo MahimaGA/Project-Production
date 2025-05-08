@@ -23,6 +23,7 @@ driver/driver="OpenAL"
 
 GameManager="*res://scripts/GameManager.cs"
 ScoreManager="*res://scripts/ScoreManager.cs"
+Startpython="*res://scripts/Startpython.cs"
 
 [display]
 
