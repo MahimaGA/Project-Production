@@ -13,7 +13,6 @@ config_version=5
 config/name="mahima-godot"
 run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
-config/icon="res://icon.svg"
 
 [audio]
 
@@ -27,8 +26,9 @@ Startpython="*res://scripts/Startpython.cs"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=3840
+window/size/viewport_height=2160
+window/size/borderless=true
 window/vsync/vsync_mode=0
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 mouse_cursor/emulate_touch_from_mouse=true
