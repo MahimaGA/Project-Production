@@ -26,9 +26,8 @@ Startpython="*res://scripts/Startpython.cs"
 
 [display]
 
-window/size/viewport_width=3840
-window/size/viewport_height=2160
-window/size/borderless=true
+window/size/viewport_width=2500
+window/size/viewport_height=1550
 window/vsync/vsync_mode=0
 mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 mouse_cursor/emulate_touch_from_mouse=true

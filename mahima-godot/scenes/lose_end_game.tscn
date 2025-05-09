@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/restart.cs" id="1_dujyq"]
 [ext_resource type="Script" path="res://scripts/endgame.cs" id="1_s76qb"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_k6h5s"]
-[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="4_aslld"]
+[ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="4_aslld"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

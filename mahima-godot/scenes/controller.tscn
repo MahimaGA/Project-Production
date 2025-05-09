@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg1hcfdorug5v"]
 
 [ext_resource type="Script" path="res://scripts/player.cs" id="1_52e5s"]
-[ext_resource type="PackedScene" uid="uid://c6o0x1jrp1qhp" path="res://assets/gun/small_gun.glb" id="2_cl6oa"]
+[ext_resource type="PackedScene" uid="uid://cbarh06my7ipk" path="res://assets/gun/small_gun.glb" id="2_cl6oa"]
 [ext_resource type="Script" path="res://scripts/raycast3d.cs" id="3_cwin8"]
 [ext_resource type="AudioStream" uid="uid://dqvfa64me0av2" path="res://assets/audios/shootaudio.wav" id="4_1t7fp"]
-[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="5_7ajs3"]
+[ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="5_7ajs3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jyds6"]
 

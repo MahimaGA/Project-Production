@@ -92,6 +92,8 @@ def main():
 
     # Create window once
     cv2.namedWindow("Frame", cv2.WINDOW_NORMAL)
+    cv2.moveWindow("Frame", 10, 600)
+
 
     # Warm up camera
     for _ in range(10):

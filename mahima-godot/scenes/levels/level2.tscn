@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="10_bf3q6"]
 [ext_resource type="Script" path="res://scripts/mute.cs" id="11_ihxwc"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="11_iqwyt"]
-[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="12_q0yln"]
+[ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="12_q0yln"]
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="12_xi18v"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_rlwen"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="14_hn246"]
