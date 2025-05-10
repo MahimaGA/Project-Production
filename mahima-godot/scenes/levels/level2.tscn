@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dtv8lt0o0jpf7"]
+[gd_scene load_steps=30 format=3 uid="uid://dtv8lt0o0jpf7"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_4ob44"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_2bbl4"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="12_xi18v"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_rlwen"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="14_hn246"]
+[ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="16_l2pgo"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="18_tad6i"]
 [ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="19_a2wah"]
 [ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="20_pnc5c"]
@@ -151,7 +152,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
 anchors_preset = 8
@@ -171,7 +172,8 @@ layout_mode = 2
 
 [node name="PauseMenu" type="Label" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("16_l2pgo")
+theme_override_font_sizes/font_size = 100
 text = "PAUSE MENU
 
 "
@@ -271,7 +273,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Score/GameOver"]
 anchors_preset = 8
@@ -291,10 +293,9 @@ layout_mode = 2
 
 [node name="GAMEOVER" type="Label" parent="UI/Score/GameOver/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "GAME OVER
-
-"
+theme_override_fonts/font = ExtResource("16_l2pgo")
+theme_override_font_sizes/font_size = 250
+text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="Instructions" type="CanvasLayer" parent="UI/Score" node_paths=PackedStringArray("buttonclick")]
@@ -308,7 +309,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/Instructions"]
 anchors_preset = 8
@@ -326,9 +327,9 @@ alignment = 1
 
 [node name="Instructions" type="Label" parent="UI/Score/Instructions/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("16_l2pgo")
+theme_override_font_sizes/font_size = 100
 text = "INSTRUCTIONS
-
 
 "
 horizontal_alignment = 1

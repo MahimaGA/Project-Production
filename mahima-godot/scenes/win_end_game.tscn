@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv473sptnhmo2"]
+[gd_scene load_steps=7 format=3 uid="uid://bv473sptnhmo2"]
 
 [ext_resource type="Script" path="res://scripts/nextlevel.cs" id="1_cavkl"]
 [ext_resource type="Script" path="res://scripts/endgame.cs" id="1_gl85u"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_le38h"]
-[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="4_xa1n4"]
+[ext_resource type="Texture2D" uid="uid://6nlxuun7o47x" path="res://assets/images/background.jpg" id="2_nggx7"]
+[ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="2_qjk8k"]
+[ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="4_xa1n4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -14,8 +16,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gl85u")
 
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(1374, 780)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_nggx7")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -29,7 +37,8 @@ alignment = 1
 
 [node name="LevelComplete" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("2_qjk8k")
+theme_override_font_sizes/font_size = 100
 text = "LEVEL COMPLETE
 "
 horizontal_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dkgvrggsv56gc"]
+[gd_scene load_steps=30 format=3 uid="uid://dkgvrggsv56gc"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_t6q0w"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_3ey48"]
@@ -9,11 +9,12 @@
 [ext_resource type="StyleBox" uid="uid://cynq8ypjrk4kn" path="res://themes/panelcontainer.tres" id="7_ydxai"]
 [ext_resource type="Script" path="res://scripts/debug.cs" id="8_0mgsq"]
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="9_bv2h2"]
+[ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="9_rws80"]
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="10_fus3t"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="11_ejr3t"]
 [ext_resource type="Script" path="res://scripts/mute.cs" id="11_sbtyj"]
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="12_gwqw5"]
-[ext_resource type="AudioStream" uid="uid://cnayy3t04b3di" path="res://assets/audios/buttonclick.wav" id="12_lerc4"]
+[ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="12_lerc4"]
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_y2678"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="14_2jqm7"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="18_1p5sn"]
@@ -151,7 +152,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
 anchors_preset = 8
@@ -171,7 +172,8 @@ layout_mode = 2
 
 [node name="PauseMenu" type="Label" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("9_rws80")
+theme_override_font_sizes/font_size = 100
 text = "PAUSE MENU
 
 "
@@ -265,7 +267,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Score/GameOver"]
 anchors_preset = 8
@@ -285,10 +287,9 @@ layout_mode = 2
 
 [node name="GAMEOVER" type="Label" parent="UI/Score/GameOver/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
-text = "GAME OVER
-
-"
+theme_override_fonts/font = ExtResource("9_rws80")
+theme_override_font_sizes/font_size = 250
+text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="Instructions" type="CanvasLayer" parent="UI/Score" node_paths=PackedStringArray("buttonclick")]
@@ -302,7 +303,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.192157, 0.360784, 0.513726, 0.74902)
+color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/Instructions"]
 anchors_preset = 8
@@ -320,7 +321,8 @@ alignment = 1
 
 [node name="Instructions" type="Label" parent="UI/Score/Instructions/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("9_rws80")
+theme_override_font_sizes/font_size = 100
 text = "INSTRUCTIONS
 
 
