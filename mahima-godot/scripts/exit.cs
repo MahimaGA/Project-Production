@@ -16,7 +16,7 @@ public partial class exit : Button
         buttonclick.Play();
         GD.Print("Exiting the game...");
 
-        var flagPath = ProjectSettings.GlobalizePath("res://mahima-opencv/exit.flag");
+        var flagPath = ProjectSettings.GlobalizePath("res://py/exit.flag");
         File.WriteAllText(flagPath, "");
     
         GetTree().Quit();

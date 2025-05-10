@@ -7,8 +7,8 @@ using System.Threading;
 public partial class Startpython : MeshInstance3D
 {
 	public bool isRunning = false;
-	public string scriptPath = "res://mahima-opencv/hand_detection.py";
-	public string pythonPath = "res://mahima-opencv/hand_detection.exe";
+	public string scriptPath = "res://py/hand_detection.py";
+	public string pythonPath = "res://py/hand_detection.exe";
 
 	public Process _pythonProcess;
 
@@ -35,7 +35,7 @@ public partial class Startpython : MeshInstance3D
 
 	public void WriteExitFlag()
     {
-        var flagPath = ProjectSettings.GlobalizePath("res://mahima-opencv/exit.flag");
+        var flagPath = ProjectSettings.GlobalizePath("res://py/exit.flag");
     	File.WriteAllText(flagPath, "");
     	GD.Print($"[startpython.cs] Wrote exit flag → {flagPath}");
     }

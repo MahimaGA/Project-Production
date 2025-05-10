@@ -15,8 +15,8 @@ build/
 *.spec
 
 # Ignore PyInstaller build artifacts
-/mahima-godot/mahima-opencv/build/
-/mahima-godot/mahima-opencv/dist/
+/mahima-godot/py/build/
+/mahima-godot/py/dist/
 
 # Ignore PyInstaller executables
 **/hand_detection.exe
