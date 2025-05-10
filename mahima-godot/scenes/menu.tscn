@@ -1,10 +1,110 @@
-[gd_scene load_steps=6 format=3 uid="uid://dppxqsw1wx0da"]
+[gd_scene load_steps=10 format=3 uid="uid://dppxqsw1wx0da"]
 
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="1_0q24i"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="2_ty1gp"]
+[ext_resource type="FontFile" uid="uid://dqjgsynq5apsr" path="res://assets/fonts/Myanmar.otf" id="3_4dvu2"]
 [ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="3_db1vv"]
 [ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="3_vi5u5"]
 [ext_resource type="VideoStream" path="res://vdo/opening.ogv" id="4_4nkkv"]
+
+[sub_resource type="Animation" id="Animation_qf5so"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Quote:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewGame:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Exit:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xwaia"]
+resource_name = "pop_letter"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.166667, 0.3, 0.433333, 0.566667, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Z", "Ze", "Zer", "Zero"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Quote:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166667, 0.833333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["", "No Hand Shooter
+
+"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewGame:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.866667, 1.13333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Exit:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.866667, 1.13333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jh73e"]
+_data = {
+"RESET": SubResource("Animation_qf5so"),
+"pop_letter": SubResource("Animation_xwaia")
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -49,32 +149,43 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vi5u5")
 theme_override_font_sizes/font_size = 250
 text = "Zero"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jh73e")
+}
+autoplay = "pop_letter"
+
+[node name="Quote" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_vi5u5")
 theme_override_font_sizes/font_size = 70
-text = "No Hand Shooter
-
-"
 horizontal_alignment = 1
 
 [node name="NewGame" type="Button" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("3_4dvu2")
+theme_override_font_sizes/font_size = 50
 text = "New Game"
 script = ExtResource("1_0q24i")
 buttonclick = NodePath("../../../Buttonclick")
 
 [node name="Exit" type="Button" parent="CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("3_4dvu2")
+theme_override_font_sizes/font_size = 50
 text = "Exit"
 script = ExtResource("2_ty1gp")
 buttonclick = NodePath("../../../Buttonclick")

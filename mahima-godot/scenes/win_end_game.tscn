@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv473sptnhmo2"]
+[gd_scene load_steps=9 format=3 uid="uid://bv473sptnhmo2"]
 
 [ext_resource type="Script" path="res://scripts/nextlevel.cs" id="1_cavkl"]
 [ext_resource type="Script" path="res://scripts/endgame.cs" id="1_gl85u"]
 [ext_resource type="Script" path="res://scripts/mainmenu.cs" id="2_le38h"]
 [ext_resource type="Texture2D" uid="uid://6nlxuun7o47x" path="res://assets/images/background.jpg" id="2_nggx7"]
 [ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="2_qjk8k"]
+[ext_resource type="FontFile" uid="uid://5dlx4wgy0mcy" path="res://assets/fonts/serpentine-sans-icg-bold-oblique.ttf" id="4_x1eno"]
 [ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="4_xa1n4"]
+[ext_resource type="FontFile" uid="uid://dqjgsynq5apsr" path="res://assets/fonts/Myanmar.otf" id="5_s8j1y"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -32,6 +34,8 @@ offset_left = -250.0
 offset_top = -161.0
 offset_right = 250.0
 offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
@@ -45,13 +49,15 @@ horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("4_x1eno")
+theme_override_font_sizes/font_size = 40
 text = "Your Score: "
 
 [node name="TargetsHit" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Targets Hit:"
+theme_override_fonts/font = ExtResource("4_x1eno")
+theme_override_font_sizes/font_size = 40
+text = "Your Score: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -60,7 +66,8 @@ size_flags_vertical = 3
 [node name="NextLevel" type="Button" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("5_s8j1y")
+theme_override_font_sizes/font_size = 40
 text = "Next Level"
 script = ExtResource("1_cavkl")
 buttonclick = NodePath("../../../Buttonclick")
@@ -68,7 +75,8 @@ buttonclick = NodePath("../../../Buttonclick")
 [node name="MainMenu" type="Button" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("5_s8j1y")
+theme_override_font_sizes/font_size = 40
 text = "Main Menu"
 script = ExtResource("2_le38h")
 buttonclick = NodePath("../../../Buttonclick")

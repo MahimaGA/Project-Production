@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://clijpixdfki8d"]
+[gd_scene load_steps=31 format=3 uid="uid://clijpixdfki8d"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_bnkj1"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_kln0g"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/newgame.cs" id="9_06byd"]
 [ext_resource type="FontFile" uid="uid://cqmgnkw0ldtlq" path="res://assets/fonts/bulletho.ttf" id="9_q13a8"]
 [ext_resource type="Script" path="res://scripts/Continue.cs" id="10_hfqif"]
+[ext_resource type="FontFile" uid="uid://dqjgsynq5apsr" path="res://assets/fonts/Myanmar.otf" id="10_qid63"]
 [ext_resource type="Script" path="res://scripts/exit.cs" id="11_1iumm"]
 [ext_resource type="Script" path="res://scripts/mute.cs" id="11_p1ds1"]
 [ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="12_0lemi"]
@@ -61,7 +62,8 @@ environment = SubResource("Environment_4pakn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 4, 0)
-light_color = Color(1, 1, 0.541176, 1)
+light_color = Color(0.486275, 1, 0.796078, 1)
+light_energy = 0.8
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
@@ -181,14 +183,16 @@ horizontal_alignment = 1
 
 [node name="RestartGame" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 50
 text = "Restart Game"
 script = ExtResource("9_06byd")
 buttonclick = NodePath("../../../Buttonclick")
 
 [node name="Continue" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("pauseMenu", "buttonclick")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 50
 text = "Continue"
 script = ExtResource("10_hfqif")
 pauseMenu = NodePath("../../..")
@@ -196,13 +200,15 @@ buttonclick = NodePath("../../../Buttonclick")
 
 [node name="Mute_Unmute" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 50
 text = "Mute/Unmute"
 script = ExtResource("11_p1ds1")
 
 [node name="Exit" type="Button" parent="PauseMenu/CenterContainer/VBoxContainer" node_paths=PackedStringArray("buttonclick")]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 50
 text = "Exit"
 script = ExtResource("11_1iumm")
 buttonclick = NodePath("../../../Buttonclick")
