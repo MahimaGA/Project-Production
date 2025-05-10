@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://clijpixdfki8d"]
+[gd_scene load_steps=33 format=3 uid="uid://clijpixdfki8d"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_bnkj1"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_kln0g"]
@@ -19,6 +19,8 @@
 [ext_resource type="Script" path="res://scripts/ScoreManager.cs" id="13_shx6k"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="14_nuv1u"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="18_7sap7"]
+[ext_resource type="Texture2D" uid="uid://c1wjsvvsyb856" path="res://assets/images/dialogue box.png" id="18_81w26"]
+[ext_resource type="FontFile" uid="uid://5dlx4wgy0mcy" path="res://assets/fonts/serpentine-sans-icg-bold-oblique.ttf" id="19_qorv1"]
 [ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="19_qpxuc"]
 [ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="20_axlke"]
 
@@ -44,13 +46,13 @@ size = Vector2(40, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qpqx1"]
 size = Vector3(60, 1, 60)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mrmf5"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1raeo"]
 load_path = "res://.godot/imported/aiming.png-c88558b4c9e7c2a9cb91c1a6aa7ad114.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8fv4x"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jlt7b"]
 load_path = "res://.godot/imported/idle.png-e2921845828603945e934cef7bc737af.ctex"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b2g5k"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vpnxk"]
 load_path = "res://.godot/imported/shoot.png-6dede5e0f1a10b574a68c66ffc9e6085.ctex"
 
 [node name="Node3D2" type="Node3D" node_paths=PackedStringArray("buttonclick")]
@@ -232,46 +234,69 @@ transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0,
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Score" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
+[node name="ScoreManager" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
 script = ExtResource("13_shx6k")
 StartingBullets = 5
-MinimumScore = 15
+MinimumScore = 9
 gameover = NodePath("GameOver")
 instructions = NodePath("Instructions")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score"]
+[node name="DialogueBox" type="Sprite2D" parent="UI/ScoreManager"]
+position = Vector2(2242, 147)
+scale = Vector2(0.266, 0.3)
+texture = ExtResource("18_81w26")
+
+[node name="Label" type="Label" parent="UI/ScoreManager"]
+offset_left = 2355.0
+offset_top = 60.0
+offset_right = 2640.0
+offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("19_qorv1")
+theme_override_font_sizes/font_size = 120
+text = "3"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_right = -19.0
-offset_bottom = 173.0
+offset_left = -508.0
+offset_top = 71.0
+offset_right = -223.0
+offset_bottom = 244.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 alignment = 2
 
-[node name="BulletsLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="BulletsLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 35
+text = "Bullets Left: 00"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 35
+text = "Your Score: 00
+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="MinimumScoreLabel" type="Label" parent="UI/Score/VBoxContainer"]
+[node name="MinimumScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_qid63")
+theme_override_font_sizes/font_size = 35
+text = "Min. Score: 00
+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="GameOver" type="CanvasLayer" parent="UI/Score"]
+[node name="GameOver" type="CanvasLayer" parent="UI/ScoreManager"]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="UI/Score/GameOver"]
+[node name="ColorRect" type="ColorRect" parent="UI/ScoreManager/GameOver"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -279,7 +304,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
-[node name="CenterContainer" type="CenterContainer" parent="UI/Score/GameOver"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/ScoreManager/GameOver"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -292,22 +317,22 @@ offset_bottom = 171.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/GameOver/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager/GameOver/CenterContainer"]
 layout_mode = 2
 
-[node name="GAMEOVER" type="Label" parent="UI/Score/GameOver/CenterContainer/VBoxContainer"]
+[node name="GAMEOVER" type="Label" parent="UI/ScoreManager/GameOver/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_q13a8")
 theme_override_font_sizes/font_size = 250
-text = "GAME OVER"
+text = "GAME OVER
+"
 horizontal_alignment = 1
 
-[node name="Instructions" type="CanvasLayer" parent="UI/Score" node_paths=PackedStringArray("buttonclick")]
+[node name="Instructions" type="CanvasLayer" parent="UI/ScoreManager"]
 visible = false
 script = ExtResource("14_nuv1u")
-buttonclick = NodePath("../../../PauseMenu/Buttonclick")
 
-[node name="ColorRect" type="ColorRect" parent="UI/Score/Instructions"]
+[node name="ColorRect" type="ColorRect" parent="UI/ScoreManager/Instructions"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -315,7 +340,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.627451, 0.12549, 0.941176, 0.498039)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Score/Instructions"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager/Instructions"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -329,25 +354,24 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Instructions" type="Label" parent="UI/Score/Instructions/VBoxContainer"]
+[node name="Instructions" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_q13a8")
 theme_override_font_sizes/font_size = 100
 text = "INSTRUCTIONS
 
-
 "
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Score/Instructions/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Signs" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+[node name="Signs" type="VBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Aim" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Aim" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Aim
@@ -355,12 +379,12 @@ text = "Aim
 
 "
 
-[node name="Aiming" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
+[node name="Aiming" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Aim"]
 position = Vector2(230, 30)
 scale = Vector2(0.4, 0.4)
-texture = SubResource("CompressedTexture2D_mrmf5")
+texture = SubResource("CompressedTexture2D_1raeo")
 
-[node name="Hold" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Hold" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Hold
@@ -368,12 +392,12 @@ text = "Hold
 
 "
 
-[node name="Idle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
+[node name="Idle" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Hold"]
 position = Vector2(230, 30)
 scale = Vector2(0.4, 0.4)
-texture = SubResource("CompressedTexture2D_8fv4x")
+texture = SubResource("CompressedTexture2D_jlt7b")
 
-[node name="Shoot" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs"]
+[node name="Shoot" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Shoot
@@ -381,16 +405,16 @@ text = "Shoot
 
 "
 
-[node name="Shoot" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
+[node name="Shoot" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Signs/Shoot"]
 position = Vector2(230, 30)
 scale = Vector2(0.4, 0.4)
-texture = SubResource("CompressedTexture2D_b2g5k")
+texture = SubResource("CompressedTexture2D_vpnxk")
 
-[node name="Scores" type="VBoxContainer" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer"]
+[node name="Scores" type="VBoxContainer" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="2" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="2" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "2 points
@@ -398,11 +422,11 @@ text = "2 points
 
 "
 
-[node name="Outer" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/2"]
+[node name="Outer" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/2"]
 position = Vector2(400, 40)
 texture = ExtResource("18_7sap7")
 
-[node name="5" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="5" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "5 points
@@ -410,11 +434,11 @@ text = "5 points
 
 "
 
-[node name="Middle" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/5"]
+[node name="Middle" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/5"]
 position = Vector2(400, 40)
 texture = ExtResource("19_qpxuc")
 
-[node name="10" type="Label" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores"]
+[node name="10" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "10 points
@@ -422,9 +446,15 @@ text = "10 points
 
 "
 
-[node name="Inner" type="Sprite2D" parent="UI/Score/Instructions/VBoxContainer/HBoxContainer/Scores/10"]
+[node name="Inner" type="Sprite2D" parent="UI/ScoreManager/Instructions/VBoxContainer/HBoxContainer/Scores/10"]
 position = Vector2(400, 40)
 texture = ExtResource("20_axlke")
+
+[node name="Exit" type="Label" parent="UI/ScoreManager/Instructions/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "I : To play"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/RestartGame" to="PauseMenu/CenterContainer/VBoxContainer/RestartGame" method="OnPressed"]
 [connection signal="pressed" from="PauseMenu/CenterContainer/VBoxContainer/Continue" to="PauseMenu/CenterContainer/VBoxContainer/Continue" method="Unpause"]

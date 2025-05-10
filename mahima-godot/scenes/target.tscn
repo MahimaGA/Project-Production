@@ -6,7 +6,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vur8n"]
 resource_name = "Material"
 cull_mode = 2
-albedo_color = Color(0, 1, 0.968627, 1)
 roughness = 0.446855
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_npfel"]
@@ -44,14 +43,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_npfel")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gj277"]
-albedo_color = Color(0, 1, 0.968627, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kdpk3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7jl7u"]
 resource_name = "Material.001"
 cull_mode = 2
-albedo_color = Color(0.768627, 0.180392, 1, 1)
+albedo_color = Color(0.784314, 0, 0, 1)
 metallic = 0.187429
 roughness = 0.446855
 

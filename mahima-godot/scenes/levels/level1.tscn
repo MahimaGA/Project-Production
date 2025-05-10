@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://chw1n4s3m26pg"]
+[gd_scene load_steps=33 format=3 uid="uid://chw1n4s3m26pg"]
 
 [ext_resource type="Script" path="res://scripts/controller.cs" id="1_fklcm"]
 [ext_resource type="PackedScene" uid="uid://67jacurn3tm4" path="res://scenes/arena.tscn" id="2_dpbb0"]
@@ -17,7 +17,9 @@
 [ext_resource type="Script" path="res://scripts/mute.cs" id="12_fqpyc"]
 [ext_resource type="AudioStream" uid="uid://dbmcmrnod67yr" path="res://assets/audios/buttonclick.wav" id="13_54rod"]
 [ext_resource type="Script" path="res://scripts/instructions.cs" id="13_uyq8m"]
+[ext_resource type="Texture2D" uid="uid://c1wjsvvsyb856" path="res://assets/images/dialogue box.png" id="17_7ddj1"]
 [ext_resource type="Texture2D" uid="uid://c1fvbdopflr0h" path="res://assets/images/outer.png" id="17_lxn6s"]
+[ext_resource type="FontFile" uid="uid://5dlx4wgy0mcy" path="res://assets/fonts/serpentine-sans-icg-bold-oblique.ttf" id="18_3i8ch"]
 [ext_resource type="Texture2D" uid="uid://ee5cvaicbdqx" path="res://assets/images/middle.png" id="18_jrh31"]
 [ext_resource type="Texture2D" uid="uid://dtbs3yx6kka4m" path="res://assets/images/inner.png" id="19_iliau"]
 [ext_resource type="PackedScene" uid="uid://gxjjurb00738" path="res://scenes/target.tscn" id="20_rfvsr"]
@@ -229,32 +231,55 @@ MinimumScore = 9
 gameover = NodePath("GameOver")
 instructions = NodePath("Instructions")
 
+[node name="DialogueBox" type="Sprite2D" parent="UI/ScoreManager"]
+position = Vector2(2242, 147)
+scale = Vector2(0.266, 0.3)
+texture = ExtResource("17_7ddj1")
+
+[node name="Label" type="Label" parent="UI/ScoreManager"]
+offset_left = 2355.0
+offset_top = 60.0
+offset_right = 2640.0
+offset_bottom = 197.0
+theme_override_fonts/font = ExtResource("18_3i8ch")
+theme_override_font_sizes/font_size = 120
+text = "1"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/ScoreManager"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -130.0
-offset_right = -19.0
-offset_bottom = 173.0
+offset_left = -508.0
+offset_top = 71.0
+offset_right = -223.0
+offset_bottom = 244.0
 grow_horizontal = 0
 size_flags_horizontal = 10
 alignment = 2
 
 [node name="BulletsLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_3u4vk")
+theme_override_font_sizes/font_size = 35
+text = "Bullets Left: 00"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_3u4vk")
+theme_override_font_sizes/font_size = 35
+text = "Your Score: 00
+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="MinimumScoreLabel" type="Label" parent="UI/ScoreManager/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("10_3u4vk")
+theme_override_font_sizes/font_size = 35
+text = "Min. Score: 00
+"
 horizontal_alignment = 2
 vertical_alignment = 1
 
@@ -294,6 +319,7 @@ text = "GAME OVER
 horizontal_alignment = 1
 
 [node name="Instructions" type="CanvasLayer" parent="UI/ScoreManager" node_paths=PackedStringArray("buttonclick")]
+visible = false
 script = ExtResource("13_uyq8m")
 buttonclick = NodePath("../../../PauseMenu/Buttonclick")
 
