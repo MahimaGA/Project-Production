@@ -238,7 +238,7 @@ transform = Transform3D(0.000244824, 0, 0.00298999, 0, 0.003, 0, -0.00298999, 0,
 
 [node name="ScoreManager" type="CanvasLayer" parent="UI" node_paths=PackedStringArray("gameover", "instructions")]
 script = ExtResource("13_rlwen")
-StartingBullets = 5
+StartingBullets = 6
 MinimumScore = 9
 gameover = NodePath("GameOver")
 instructions = NodePath("Instructions")

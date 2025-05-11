@@ -19,7 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_s76qb")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(1362, 685)
+position = Vector2(1362, 787)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_v722n")
 
